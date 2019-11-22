@@ -4,6 +4,7 @@ header {
     background-image: url("../../img/header.jpg");
     background-size: 100%;
     justify-content: center;
+
     .h_container {
         display: flex;
         flex-direction: column;
@@ -16,18 +17,31 @@ header {
             .h__f1 {
             text-align: center;
             text-transform: uppercase;
+           
+
             }
 
             .h__f2 {
             text-align: center;
+          
         }
 
     }
+}
+button{
+    //þegar takki er virkjaður er background: #2d2;
+    background:$lightgrey;
+    border-radius: 5px;
+    padding:0.5em;
+    display: inline-block;
+    height:2.5em;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: bold;
 }
 
 
 .valmynd {
     display: flex;
-    margin: 2em 12em 2em 12em;
+    margin: $gutter 12em $gutter 12em;
     justify-content: center;
 }
