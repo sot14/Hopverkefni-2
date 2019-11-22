@@ -1,7 +1,7 @@
 header {
     display: flex;
     height: 40vh;
-    background-image: url("../../img/header.jpg");
+    background-image: url("../img/header.jpg");
     background-size: 100%;
     justify-content: center;
     .h_container {
@@ -25,9 +25,19 @@ header {
     }
 }
 
-
 .valmynd {
     display: flex;
     margin: 2em 12em 2em 12em;
     justify-content: center;
+
+    .valmynd_takkar {
+        .valm__html, .valm__css, .valm__js {
+            border-radius: 15px;
+            padding: 20px;
+        }
+        .valm__html:hover , .valm__css:hover , .valm__js:hover {
+            background-color: $darkgrey;
+            transition: 0.5s ease;
+        }
+    }
 }
