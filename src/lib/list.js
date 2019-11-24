@@ -12,3 +12,12 @@ export default class List {
   }
 }
 
+<<<<<<< HEAD
+=======
+function getData () {
+  fetch('./lectures.json') 
+  .then(res => res.json()) 
+  .then (res => console.log(res));
+}
+
+>>>>>>> e295627d8d32b11848f8817c32a08c096502aeae
