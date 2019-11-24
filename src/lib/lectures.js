@@ -20,7 +20,13 @@ fetchLecture() {
 }
 
 loadLecture() {
-    const lData = fetchLecture();
+    const lData = JSON.parse(fetchLecture());
+    const lSlug = lData.slug;
+    const lTitle = lData.title;
+    const lCategory = lData.category;
+    const lImage = url(`${lData.image}`);
+    const lThumbnail = url(`${lData.thumbnail}`);
+    const lContent = lData.content;
 
 }
 
