@@ -9,3 +9,10 @@ export default class List {
     empty(this.container);
   }
 }
+
+function getData () {
+  fetch('./lectures.json') 
+  .then(res => res.json()) 
+  .then (res => console.log(res));
+}
+
