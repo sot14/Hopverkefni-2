@@ -4,9 +4,10 @@ export default class Lecture {
     this.container = document.querySelector('.lecture');
     this.url = 'lectures.json';
   }
-}
+
 
 fetchLecture() {
+  debugger;
     fetch(this.url)
         .then((res) => {
             if(!res.ok) {
@@ -76,7 +77,7 @@ displayLecture() {
       'code',
     ];
 
-
+  }
 }
 
 /*"lectures": [
