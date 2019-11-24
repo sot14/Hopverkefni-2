@@ -1,78 +1,94 @@
+/* eslint-disable linebreak-style */
 
 export default class Lecture {
   constructor() {
     this.container = document.querySelector('.lecture');
     this.url = 'lectures.json';
   }
-}
 
-fetchLecture() {
+  fetchLecture() {
     fetch(this.url)
-        .then((res) => {
-            if(!res.ok) {
-                throw new Error('Villa við að sækja fyrirlestur');
-            }
-            return res.json();
-        })
-        .then((data) => {
-          displayLecture();
-        })
-        .catch((error) => {
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Villa við að sækja fyrirlestur');
+        }
+        return res.json();
+      })
+      /* .then((data) => {
+        this.loadLecture();
+      }) */
+      .catch((error) => {
         console.error('Villa við að sækja gögn', error);
-        });
-}
+      });
+  }
 
-loadLecture() {
-    const lData = JSON.parse(fetchLecture());
+  loadLecture() {
+    const lData = JSON.parse(this.fetchLecture());
+
     const lSlug = lData.slug;
     const lTitle = lData.title;
     const lCategory = lData.category;
-    const lImage = url(`${lData.image}`);
-    const lThumbnail = url(`${lData.thumbnail}`);
+    const lImage = `url('${lData.image}')`;
+    // const lThumbnail = url(`${lData.thumbnail}`);
     const lContent = lData.content;
 
-}
+    this.displayHeader(lSlug, lTitle, lImage, lCategory);
+    this.displayLecture(lContent);
+    this.displayFooter();
 
-displayHeader() {
+  }
 
-}
+  displayHeader(slug, title, image, category) { // ath. kannski hægt að gera aðaldótið í sass og uppfæra innihaldið hér
+    const content = document.querySelector('.header__content');
 
-displayFooter() {
+    const img = document.createElement('img');
+    img.src = image;
+    
+    const h3 = document.createElement('h3');
+    h3.appendChild(createTextNode(category));
+    const h = document.createElement('h1');
+    h.appendChild(createTextNode(title)); // af hverju virkar þetta ekki? kemur createTextNode undefined
 
-}
+    content.appendChild(img);
+    content.appendChild(h3);
+    content.appendChild(h);
 
-showYoutube() {
+  }
 
-}
+  displayFooter() {
 
-showQuote() {
+  }
 
-}
+  showYoutube() {
 
-showImage() {
+  }
 
-}
+  showQuote() {
 
-showHeading() {
+  }
 
-}
+  showImage() {
 
-showList() {
+  }
 
-}
+  showHeading() {
 
-showCode() {
+  }
 
-}
+  showList() {
+
+  }
+
+  showCode() {
+
+  }
 
 
 
-displayLecture() {
-  const header = document.querySelector('lecture-header');
-  const main = document.querySelector('lecture-main');
-  const footer = document.querySelector('lecture-footer');
+  displayLecture(lContent) {
+    const main = document.querySelector('.lecture-main');
 
-  const types = [
+    const types = [
       'youtube',
       'text',
       'quote',
@@ -83,9 +99,10 @@ displayLecture() {
     ];
 
 
+  }
 }
 
-/*"lectures": [
+/* "lectures": [
   {
     "slug": "html-sagan",
     "title": "Sagan",
