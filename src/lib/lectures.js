@@ -6,8 +6,12 @@ export default class Lecture {
   }
 }
 
+<<<<<<< HEAD
 loadLecture(slug) {
   debugger;
+=======
+fetchLecture() {
+>>>>>>> 5f0e800d56ffd9ca0285d7761e9c84680d228a24
     fetch(this.url)
         .then((res) => {
             if(!res.ok) {
@@ -24,7 +28,11 @@ loadLecture(slug) {
 }
 
 loadLecture() {
+<<<<<<< HEAD
   const lData = fetchLecture();
+=======
+    const lData = fetchLecture();
+>>>>>>> 5f0e800d56ffd9ca0285d7761e9c84680d228a24
 
 }
 
@@ -63,6 +71,7 @@ showCode() {
 
 
 displayLecture() {
+<<<<<<< HEAD
   const header = document.querySelector('lecture-header');
   const main = document.querySelector('lecture-main');
   const footer = document.querySelector('lecture-footer');
@@ -76,6 +85,21 @@ displayLecture() {
       'list',
       'code',
     ];
+=======
+    const header = document.querySelector('lecture-header');
+    const main = document.querySelector('lecture-main');
+    const footer = document.querySelector('lecture-footer');
+
+    const types = [
+        'youtube',
+        'text',
+        'quote',
+        'image',
+        'heading',
+        'list',
+        'code',
+      ];
+>>>>>>> 5f0e800d56ffd9ca0285d7761e9c84680d228a24
 
 
 }

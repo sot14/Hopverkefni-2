@@ -1,7 +1,12 @@
 $max-width: 1200px;
 $gutter: 20px;
+<<<<<<< HEAD
+$font-header: 'Roboto Mono', monospace;
+$font-main: "Times New Roman", serif;
+=======
 $font-main: 'Times New Roman', serif;
 $font-header:'Roboto Mono', monospace;
+>>>>>>> e295627d8d32b11848f8817c32a08c096502aeae
 
 /*div {
   villa-fjarlægðu-mig;
@@ -16,5 +21,10 @@ $green: #2d2;
 $darkgreen: #1a1;
 $cream: #fcffd2;
 $maroon: #cc9694;
+
+$base:16px;
+$small:24px;
+$medium:32px;
+$large:48;
 
 //16 24 32 48 skalanir á leturstærð
