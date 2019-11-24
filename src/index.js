@@ -6,11 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const isLecturePage = page.classList.contains('lecture-page');
 
   if (isLecturePage) {
+<<<<<<< HEAD
     const lecture = new Lecture();
     lecture.load();
     debugger;
+=======
+    
+    } 
+>>>>>>> c81b078085b77ac80dda0ca4d2af037ec6dde2ea
 
-  } else {
+  else {
     const list = new List();
     list.load();
   }
