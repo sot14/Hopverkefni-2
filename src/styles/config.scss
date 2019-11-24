@@ -1,6 +1,7 @@
 $max-width: 1200px;
 $gutter: 20px;
-$font-main: monospace;
+$font-header: 'Roboto Mono', monospace;
+$font-main: "Times New Roman", serif;
 
 /*div {
   villa-fjarlægðu-mig;
@@ -16,7 +17,7 @@ $darkgreen: #1a1;
 $cream: #fcffd2;
 $maroon: #cc9694;
 
-$xsmall:16px;
+$base:16px;
 $small:24px;
 $medium:32px;
 $large:48;

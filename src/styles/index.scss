@@ -2,41 +2,36 @@ header {
     display: flex;
     height: 40vh;
     background-image: url("../img/header.jpg");
+    background-repeat: no-repeat;
     background-size: 100%;
     justify-content: center;
 
-    .h_container {
+    .h__container {
+        background-size: cover;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         flex-wrap: wrap;
         background-color: rgba(255,255,255,0.4);
         width: 100%;
         height: 100%;
 
             .h__f1 {
-            text-align: center;
+            display: block;
             text-transform: uppercase;
-           
-
+            font-family: $font-header;
+            position: relative;
+  
             }
-
             .h__f2 {
+            
+            display: block;
             text-align: center;
-          
+            font-family: $font-header;
         }
 
     }
-}
-button{
-    //þegar takki er virkjaður er background: #2d2;
-    background:$lightgrey;
-    border-radius: 5px;
-    padding:0.5em;
-    display: inline-block;
-    height:2.5em;
-    font-family: 'Roboto Mono', monospace;
-    font-weight: bold;
 }
 
 .valmynd {
@@ -44,14 +39,24 @@ button{
     margin: $gutter 12em $gutter 12em;
     justify-content: center;
 
-    .valmynd_takkar {
+    .valmynd__takkar {
         .valm__html, .valm__css, .valm__js {
-            border-radius: 15px;
-            padding: 20px;
+            padding: $gutter*0.5;
+            background:$lightgrey;
+            border-radius: 10px;
+            font-family: $font-header;
+            font-weight: bold;
         }
         .valm__html:hover , .valm__css:hover , .valm__js:hover {
             background-color: $darkgrey;
             transition: 0.5s ease;
         }
     }
+}
+@media(max-width:600px){
+    .valmynd{
+        margin: auto;
+    }
+
+    
 }
