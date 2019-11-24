@@ -26,5 +26,4 @@ function getData () {
     "image": "img/code.jpg",
     "thumbnail": "img/thumb1.jpg",
     "content": [
-
 /*
