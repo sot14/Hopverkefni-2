@@ -20,7 +20,10 @@ loadLecture(slug) {
 }
 
 displayLecture() {
+    const header = document.querySelector('lecture-header');
+    const main = document.querySelector('lecture-main');
     
+
 }
 
 /*"lectures": [
