@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 /* eslint-disable linebreak-style */
 
-=======
->>>>>>> b6c7293a56eaa2d7c6f0aabf81d2448177e204f4
 export default class Lecture {
   constructor() {
     this.container = document.querySelector('.lecture');
