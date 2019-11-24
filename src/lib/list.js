@@ -12,12 +12,22 @@ export default class List {
   }
 }
 
-<<<<<<< HEAD
-=======
+
 function getData () {
   fetch('./lectures.json') 
   .then(res => res.json()) 
   .then (res => console.log(res));
 }
 
->>>>>>> e295627d8d32b11848f8817c32a08c096502aeae
+
+// eslint-disable-next-line spaced-comment
+/* "lectures": [
+  {
+    "slug": "html-sagan",
+    "title": "Sagan",
+    "category": "html",
+    "image": "img/code.jpg",
+    "thumbnail": "img/thumb1.jpg",
+    "content": [
+/*
+
