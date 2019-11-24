@@ -6,7 +6,7 @@ export default class Lecture {
   }
 }
 
-loadLecture(slug) {
+fetchLecture() {
     fetch(this.url)
         .then((res) => {
             if(!res.ok) {
@@ -19,10 +19,60 @@ loadLecture(slug) {
         });
 }
 
+loadLecture() {
+    const lData = fetchLecture();
+
+}
+
+displayHeader() {
+
+}
+
+displayFooter() {
+
+}
+
+showYoutube() {
+
+}
+
+showQuote() {
+
+}
+
+showImage() {
+
+}
+
+showHeading() {
+
+}
+
+showList() {
+
+}
+
+showCode() {
+
+}
+
+
+
 displayLecture() {
     const header = document.querySelector('lecture-header');
     const main = document.querySelector('lecture-main');
-    
+    const footer = document.querySelector('lecture-footer');
+
+    const types = [
+        'youtube',
+        'text',
+        'quote',
+        'image',
+        'heading',
+        'list',
+        'code',
+      ];
+
 
 }
 
