@@ -1,14 +1,10 @@
-<<<<<<< HEAD
 /* eslint-disable linebreak-style */
 /* eslint-disable no-trailing-spaces */ 
 import { empty } from './helpers';
-=======
-import { empty, el } from './helpers';
->>>>>>> 64c67da961a6ea0ffdcced73acb546980f03f1ad
 
 let jsonData;
 const lectureItem = ['title', 'category', 'thumbnail'];
-const container;
+let container;
 
 function getHtml() {
   console.log('Hey!');
@@ -36,11 +32,12 @@ export default class List {
   }
   
   load() {
-    //empty(this.container);
+    // empty(this.container);
     this.htmlButton.addEventListener('click', getHtml);
     this.cssButton.addEventListener('click', getCSS);
     this.jsButton.addEventListener('click', getJS);
 
+    debugger;
     fetch('./lectures.json')  
       .then((res) => {
         if (!res.ok) {

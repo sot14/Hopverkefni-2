@@ -64,36 +64,50 @@ export default class Lecture {
 
   }
 
-  showYoutube() {
+  showYoutube(element, source) {
+    /* {
+        "type": "youtube",
+        "data": "https://www.youtube.com/embed/-dC37AYntUQ"
+      }, */
+    const div = document.createElement('div');
+    const video = document.createElement('iframe');
+    video.setAttribute('src', source);
+
+    div.appendChild(video);
+    element.appendChild(div);
+  }
+
+  showText(element, data) {
+    const p = document.createElement('p');
+    p.appendChild(document.createTextNode(data)); // þarf að gera fleiri p fyrir hvert new line?
+    element.appendChild(p);
+  }
+
+  showQuote(element, data, attribute) {
 
   }
 
-  showQuote() {
+  showImage(element, data, caption) {
 
   }
 
-  showImage() {
+  showHeading(element, data) {
 
   }
 
-  showHeading() {
+  showList(element, data) {
 
   }
 
-  showList() {
+  showCode(element, data) {
 
   }
-
-  showCode() {
-
-  }
-
 
 
   displayLecture(lContent) {
     const main = document.querySelector('.lecture-main');
 
-    const types = [
+    /* const types = [
       'youtube',
       'text',
       'quote',
@@ -101,9 +115,31 @@ export default class Lecture {
       'heading',
       'list',
       'code',
-    ];
+    ]; */
 
-
+    for (let i = 0; i < lContent.length; i += 1) {
+      if (lContent[i].type === 'youtube') {
+        this.showYoutube(main, lContent[i].data);
+      }
+      if (lContent[i].type === 'text') {
+        this.showText(main, lContent[i].data);
+      }
+      if (lContent[i].type === 'quote') {
+        this.showQuote(main, lContent[i].data, lContent[i].attribute);
+      }
+      if (lContent[i].type === 'image') {
+        this.showImage(main, lContent[i].data, lContent[i].caption);
+      }
+      if (lContent[i].type === 'heading') {
+        this.showHeading(main, lContent[i].data);
+      }
+      if (lContent[i].type === 'list') {
+        this.showList(main, lContent[i].data);
+      }
+      if (lContent[i].type === 'code') {
+        this.showCode(main, lContent[i].data)
+      }
+    }
   }
 }
 
