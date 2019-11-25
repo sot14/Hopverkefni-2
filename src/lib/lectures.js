@@ -26,6 +26,7 @@ export default class Lecture {
   }
 
   loadLecture() {
+    empty(this.container);
     const lData = JSON.parse(this.fetchLecture());
 
     const lSlug = lData.slug;
@@ -51,10 +52,8 @@ export default class Lecture {
       header.style.backgroundImage = image;
     } else header.style.backgroundColor = 'grey';
     
-    const h3 = document.createElement('h3');
-    h3.appendChild(document.createTextNode(category));
-    const h = document.createElement('h1');
-    h.appendChild(document.createTextNode(title));
+    const h3 = el('h3', category);
+    const h = el('h1', title);
     
     content.appendChild(h3);
     content.appendChild(h);
@@ -84,28 +83,39 @@ export default class Lecture {
   }
 
   showQuote(element, data, attribute) {
-
+    const lecQuote = el('blockquote', el('p', data), el('p', attribute));
+    element.appendChild(lecQuote);
   }
 
   showImage(element, data, caption) {
-
+    const img = document.createElement('img');
+    img.src = data;
+    const cite = el('cite', caption);
+    const div = el('div', img, cite);
+    element.appendChild(div);
   }
 
   showHeading(element, data) {
-
+    const head = el('h1', data);
+    element.appendChild(head);
   }
 
   showList(element, data) {
-
+    const lecList = document.createElement('ul');
+    for (let i = 0; i < data.length; i += 1) {
+      lecList.appendChild(el('li', data[i])); // ATH hvort sé rétt
+    }
+    element.appendChild(lecList);
   }
 
   showCode(element, data) {
-
+    // þarf mögulega að replacea & = &amp og < = &lt
+    const lecCode = el('code', data);
+    element.appendChild(lecCode);
   }
 
 
   displayLecture(lContent) {
-    const main = document.querySelector('.lecture-main');
 
     /* const types = [
       'youtube',
@@ -119,25 +129,25 @@ export default class Lecture {
 
     for (let i = 0; i < lContent.length; i += 1) {
       if (lContent[i].type === 'youtube') {
-        this.showYoutube(main, lContent[i].data);
+        this.showYoutube(this.container, lContent[i].data);
       }
       if (lContent[i].type === 'text') {
-        this.showText(main, lContent[i].data);
+        this.showText(this.container, lContent[i].data);
       }
       if (lContent[i].type === 'quote') {
-        this.showQuote(main, lContent[i].data, lContent[i].attribute);
+        this.showQuote(this.container, lContent[i].data, lContent[i].attribute);
       }
       if (lContent[i].type === 'image') {
-        this.showImage(main, lContent[i].data, lContent[i].caption);
+        this.showImage(this.container, lContent[i].data, lContent[i].caption);
       }
       if (lContent[i].type === 'heading') {
-        this.showHeading(main, lContent[i].data);
+        this.showHeading(this.container, lContent[i].data);
       }
       if (lContent[i].type === 'list') {
-        this.showList(main, lContent[i].data);
+        this.showList(this.container, lContent[i].data);
       }
       if (lContent[i].type === 'code') {
-        this.showCode(main, lContent[i].data)
+        this.showCode(this.container, lContent[i].data)
       }
     }
   }
