@@ -1,12 +1,54 @@
-import { empty } from './helpers';
+import { empty, el } from './helpers';
 
+let jsonData;
+const lectureItem = ['title', 'category', 'thumbnail'];
+const container;
+
+function getHtml() {
+  console.log('Hey!');
+  displayLectureList(container, lectureItem, jsonData.lectures);
+}
+
+function getCSS() {
+  console.log('Hó!');
+}
+
+function getJS() {
+  console.log('hello');
+}
+function displayLectureList() {
+  const element = el;
+ 
+}
 export default class List {
   constructor() {
     this.container = document.querySelector('.list');
+    this.htmlButton = document.querySelector('.valm__html');
+    this.cssButton = document.querySelector('.valm__css');
+    this.jsButton = document.querySelector('.valm__js');
+
   }
   
   load() {
-    empty(this.container);
+    //empty(this.container);
+    this.htmlButton.addEventListener('click', getHtml);
+    this.cssButton.addEventListener('click', getCSS);
+    this.jsButton.addEventListener('click', getJS);
+
+    fetch('./lectures.json')  
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Villa við að sækja fyrirlestur');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        jsonData = data;
+        displayLectureList(lectureItem);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 }
 
