@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable no-trailing-spaces */ 
 import { empty } from './helpers';
 
 export default class List {

@@ -1,6 +1,7 @@
-/**
+/* eslint-disable linebreak-style */
+/*
  * Sækir og vistar í localStorage
- */
+*/
 
 // Fast sem skilgreinir heiti á lykli sem vistað er undir í localStorage
 const LOCALSTORAGE_KEY = 'lecture_data';
@@ -19,7 +20,6 @@ export function save(slug) {
 
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(lecture));
 }
-
 
 /**
  * Hreinsar alla lectures úr localStorage

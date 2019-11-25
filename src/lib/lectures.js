@@ -1,3 +1,4 @@
+/* eslint-disable no-trailing-spaces */
 /* eslint-disable linebreak-style */
 
 export default class Lecture {
@@ -28,31 +29,33 @@ export default class Lecture {
     const lSlug = lData.slug;
     const lTitle = lData.title;
     const lCategory = lData.category;
-    const lImage = `url('${lData.image}')`;
+    let lImage;
+    if (lData.image) {
+      lImage = `url('${lData.image}')`;
+    } else lImage = null;
+    
     // const lThumbnail = url(`${lData.thumbnail}`);
     const lContent = lData.content;
 
-    this.displayHeader(lSlug, lTitle, lImage, lCategory);
+    this.displayHeader(lTitle, lImage, lCategory);
     this.displayLecture(lContent);
     this.displayFooter();
-
   }
 
-  displayHeader(slug, title, image, category) { // ath. kannski hægt að gera aðaldótið í sass og uppfæra innihaldið hér
+  displayHeader(title, image, category) { // ath. kannski hægt að gera aðaldótið í sass og uppfæra innihaldið hér
+    const header = document.querySelector('header');
     const content = document.querySelector('.header__content');
-
-    const img = document.createElement('img');
-    img.src = image;
+    if (image != null) {
+      header.style.backgroundImage = image;
+    } else header.style.backgroundColor = 'grey';
     
     const h3 = document.createElement('h3');
-    h3.appendChild(createTextNode(category));
+    h3.appendChild(document.createTextNode(category));
     const h = document.createElement('h1');
-    h.appendChild(createTextNode(title)); // af hverju virkar þetta ekki? kemur createTextNode undefined
-
-    content.appendChild(img);
+    h.appendChild(document.createTextNode(title));
+    
     content.appendChild(h3);
     content.appendChild(h);
-
   }
 
   displayFooter() {
