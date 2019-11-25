@@ -1,5 +1,6 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable linebreak-style */
+import { el, empty } from './helpers';
 
 export default class Lecture {
   constructor() {
@@ -8,6 +9,7 @@ export default class Lecture {
   }
 
   fetchLecture() {
+    debugger;
     fetch(this.url)
       .then((res) => {
         if (!res.ok) {
@@ -59,7 +61,7 @@ export default class Lecture {
   }
 
   displayFooter() {
-    
+
   }
 
   showYoutube() {
