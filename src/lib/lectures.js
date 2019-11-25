@@ -59,7 +59,7 @@ export default class Lecture {
   }
 
   displayFooter() {
-
+    
   }
 
   showYoutube() {
