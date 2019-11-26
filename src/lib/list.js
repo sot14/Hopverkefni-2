@@ -27,19 +27,33 @@ export default class List {
   }
 
   displayLectureList(data) {
-    jsonData = JSON.parse(data);
     empty(this.container);
     const div = el('div', 'halló');
     this.container.appendChild(div);
-    for (let i = 0; i < jsonData.length;) {
-      const element = ('div', this.displayLecListItem(jsonData.lectures[i]));
+    for (let i = 0; i < data.lectures.length;) {
+      const element = ('div', this.displayLecListItem(data.lectures[i]));
       this.container.appendChild(element);
     }
 
   }
 
   displayLecListItem(item) {
-    const thumb = item.thumbnail;
+    const title = el('div', item.title);
+    title.classList.add('list__title');
+
+    const category = el('div', item.category);
+    category.classList.add('list__category');
+
+    const divImage = document.createElement('div');
+
+    if (item.thumbnail) {
+      const image = document.createElement('img');
+      image.src = item.thumbnail;
+      divImage.appendChild(image);
+    }
+    const lectureItem = el('div', title, category, divImage);
+    return lectureItem;
+    
   }
 
 
@@ -69,6 +83,7 @@ export default class List {
         return res.json();
       })
       .then((data) => {
+        debugger;
         this.displayLectureList(data);
       })
       .catch((error) => {
