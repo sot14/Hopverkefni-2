@@ -20,6 +20,7 @@ function displayLectureList() {
   data = JSON.parse(data);
   for (let i = 0; i < data.length; i += 1) {
 }
+}
 
 function loadLecture() {
 
@@ -50,6 +51,7 @@ export default class List {
     for (let i = 0; i < data.length; i += 1) {
 
     }
+  }
     
   load() {
     empty(this.container);
