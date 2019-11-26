@@ -1,66 +1,54 @@
+/* eslint-disable linebreak-style */
 import { empty, el } from './helpers';
 
-let container;
+let jsonData;
 
-
-function getHtml() {
-  console.log('Hey!');
-  displayLectureList(container, lectureItem, jsonData.lectures);
-}
-
-function getCSS() {
-  console.log('Hó!');
-}
-
-function getJS() {
-  console.log('hello');
-}
-function displayLectureList() {
-  const lectureItem = ['title', 'category', 'thumbnail'];
-  data = JSON.parse(data);
-  for (let i = 0; i < data.length; i += 1) {
-}
-}
-
-function loadLecture() {
-
-}
 export default class List {
   constructor() {
     this.container = document.querySelector('.list');
     this.htmlButton = document.querySelector('.valm__html');
     this.cssButton = document.querySelector('.valm__css');
     this.jsButton = document.querySelector('.valm__js');
-
   }
+
   getHtml() {
     console.log('Hey!');
-    displayLectureList(jsonData, );
+    this.filterLectureList(jsonData, 'html');
   }
 
   getCSS() {
     console.log('Hó!');
+    this.filterLectureList(jsonData, 'css');
   }
 
   getJS() {
     console.log('hello');
+    this.filterLectureList(jsonData, 'javascript');
   }
 
-  displayLectureList(data, items, filter) {
-    data = JSON.parse(data);
+  displayLectureList(data) {
+    empty(this.container);
+  }
+
+  filterLectureList(data, filter) {
+    let lectures;
     for (let i = 0; i < data.length; i += 1) {
-
+      if (data.lectures[i].category === filter) {
+        lectures += data.lectures[i];
+      }
     }
+    this.displayLectureList(lectures);
   }
-    
+
+
   load() {
     empty(this.container);
-    this.htmlButton.addEventListener('click', getHtml);
-    this.cssButton.addEventListener('click', getCSS);
-    this.jsButton.addEventListener('click', getJS);
+    this.htmlButton.addEventListener('click', this.getHtml);
+    this.cssButton.addEventListener('click', this.getCSS);
+    this.jsButton.addEventListener('click', this.getJS);
 
     debugger;
-    fetch('./lectures.json')  
+    fetch('./lectures.json')
       .then((res) => {
         if (!res.ok) {
           throw new Error('Villa við að sækja fyrirlestur');
@@ -68,7 +56,7 @@ export default class List {
         return res.json();
       })
       .then((data) => {
-        displayLectureList(data);
+        jsonData = JSON.parse(data);
       })
       .catch((error) => {
         console.error(error);

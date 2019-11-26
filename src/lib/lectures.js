@@ -5,7 +5,7 @@ import { el, empty } from './helpers';
 export default class Lecture {
   constructor() {
     this.container = document.querySelector('.lecture');
-    this.url = 'lectures.json';
+    this.url = './lectures.json';
   }
 
   fetchLecture(slug) { // TODO ná í rétt slug
@@ -24,7 +24,7 @@ export default class Lecture {
             correctLecture = data.lectures[i];
           }
         }
-        if (correctLecture === null) {
+        if (!correctLecture) {
           throw new Error('Fann ekki fyrirlestur');
         }
         return correctLecture;
@@ -65,7 +65,7 @@ export default class Lecture {
     const h = el('h1', title);
     
     content.appendChild(h3);
-    content.appendChild(h1);
+    content.appendChild(h);
   }
 
 
