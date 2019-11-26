@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-/* eslint-disable linebreak-style */
-/* eslint-disable no-trailing-spaces */ 
-import { empty } from './helpers';
-=======
 import { empty, el } from './helpers';
->>>>>>> 64c67da961a6ea0ffdcced73acb546980f03f1ad
 
-let jsonData;
-const lectureItem = ['title', 'category', 'thumbnail'];
-const container;
+let container;
+
 
 function getHtml() {
   console.log('Hey!');
@@ -23,8 +16,13 @@ function getJS() {
   console.log('hello');
 }
 function displayLectureList() {
-  const element = el;
- 
+  const lectureItem = ['title', 'category', 'thumbnail'];
+  data = JSON.parse(data);
+  for (let i = 0; i < data.length; i += 1) {
+}
+
+function loadLecture() {
+
 }
 export default class List {
   constructor() {
@@ -37,11 +35,12 @@ export default class List {
   
   load() {
     //empty(this.container);
+    debugger;
     this.htmlButton.addEventListener('click', getHtml);
     this.cssButton.addEventListener('click', getCSS);
     this.jsButton.addEventListener('click', getJS);
 
-    fetch('./lectures.json')  
+    fetch('./lectures.json')
       .then((res) => {
         if (!res.ok) {
           throw new Error('Villa við að sækja fyrirlestur');
@@ -49,8 +48,7 @@ export default class List {
         return res.json();
       })
       .then((data) => {
-        jsonData = data;
-        displayLectureList(lectureItem);
+        displayLectureList(data);
       })
       .catch((error) => {
         console.error(error);

@@ -8,7 +8,7 @@ export default class Lecture {
     this.url = 'lectures.json';
   }
 
-  fetchLecture() {
+  fetchLecture(slug) { // TODO ná í rétt slug
     debugger;
     fetch(this.url)
       .then((res) => {
@@ -17,18 +17,28 @@ export default class Lecture {
         }
         return res.json();
       })
-      /* .then((data) => {
-        this.loadLecture();
-      }) */
+      .then((data) => {
+        let correctLecture;
+        for (let i = 0; i < data.length; i += 1) {
+          if (data.lectures[i].slug === slug) {
+            correctLecture = data.lectures[i];
+          }
+        }
+        if (correctLecture === null) {
+          throw new Error('Fann ekki fyrirlestur');
+        }
+        return correctLecture;
+      })
       .catch((error) => {
         console.error('Villa við að sækja gögn', error);
       });
   }
 
   loadLecture() {
-    const lData = JSON.parse(this.fetchLecture());
+    const slug = new URLSearchParams(window.location.search.substring(6));
+    empty(this.container);
+    const lData = JSON.parse(this.fetchLecture(slug)); 
 
-    const lSlug = lData.slug;
     const lTitle = lData.title;
     const lCategory = lData.category;
     let lImage;
@@ -41,69 +51,126 @@ export default class Lecture {
 
     this.displayHeader(lTitle, lImage, lCategory);
     this.displayLecture(lContent);
-    this.displayFooter();
+    this.displayFooter(slug);
   }
 
-  displayHeader(title, image, category) { // ath. kannski hægt að gera aðaldótið í sass og uppfæra innihaldið hér
+  displayHeader(title, image, category) { // ath. þarf kannski að búa til sér header hér
     const header = document.querySelector('header');
     const content = document.querySelector('.header__content');
     if (image != null) {
       header.style.backgroundImage = image;
     } else header.style.backgroundColor = 'grey';
     
-    const h3 = document.createElement('h3');
-    h3.appendChild(document.createTextNode(category));
-    const h = document.createElement('h1');
-    h.appendChild(document.createTextNode(title));
+    const h3 = el('h3', category);
+    const h = el('h1', title);
     
     content.appendChild(h3);
     content.appendChild(h);
   }
 
-  displayFooter() {
 
+  displayFooter(slug) {
+    const saved = window.localStorage.getItem(slug);
+
+    const klaraButton = document.createElement('button');
+    klaraButton.addEventListener('click', this.isFinished.bind(this, slug));
+    if (saved) {
+      klaraButton.innerText = '✔ Kláraður fyrirlestur';
+      klaraButton.style.color = '#2d2';
+    } else klaraButton.innerText = 'Klára fyrirlestur';
+     
+    const backButton = document.createElement('button'); // TO DO fara aftur á forsíðu
+    backButton.innerText = 'Til baka';
+    const footer = el('footer', klaraButton, backButton);
+    this.container.appendChild(footer);
   }
 
-  showYoutube() {
-
+  isFinished(e, slug) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ á fyrirlestur í list
+    const { target } = e;
+    if (target.innerText === 'Klára fyrirlestur') {
+      target.innerText = '✔ Kláraður fyrirlestur';
+      target.style.color = '#2d2';
+      window.localStorage.setItem(slug, slug);
+    } else if (target.innerText === '✔ Kláraður fyrirlestur') {
+      target.innerText = 'Klára fyrirlestur';
+      window.localStorage.removeItem(slug);
+    }
   }
 
-  showQuote() {
+  showYoutube(element, source) {
+    
+    const div = document.createElement('div');
+    const video = document.createElement('iframe');
+    video.setAttribute('src', source);
 
+    div.appendChild(video);
+    element.appendChild(div);
   }
 
-  showImage() {
-
+  showText(element, data) {
+    const p = document.createElement('p');
+    p.appendChild(document.createTextNode(data)); // þarf að gera fleiri p fyrir hvert new line?
+    element.appendChild(p);
   }
 
-  showHeading() {
-
+  showQuote(element, data, attribute) {
+    const lecQuote = el('blockquote', el('p', data), el('p', attribute));
+    element.appendChild(lecQuote);
   }
 
-  showList() {
-
+  showImage(element, data, caption) {
+    const img = document.createElement('img');
+    img.src = data;
+    const cite = el('cite', caption);
+    const div = el('div', img, cite);
+    element.appendChild(div);
   }
 
-  showCode() {
-
+  showHeading(element, data) {
+    const head = el('h1', data);
+    element.appendChild(head);
   }
 
+  showList(element, data) {
+    const lecList = document.createElement('ul');
+    for (let i = 0; i < data.length; i += 1) {
+      lecList.appendChild(el('li', data[i])); // ATH hvort sé rétt
+    }
+    element.appendChild(lecList);
+  }
+
+  showCode(element, data) {
+    // þarf mögulega að replacea & = &amp og < = &lt
+    const lecCode = el('code', data);
+    element.appendChild(lecCode);
+  }
 
 
   displayLecture(lContent) {
-    const main = document.querySelector('.lecture-main');
 
-    const types = [
-      'youtube',
-      'text',
-      'quote',
-      'image',
-      'heading',
-      'list',
-      'code',
-    ];
-
-
+    for (let i = 0; i < lContent.length; i += 1) {
+      if (lContent[i].type === 'youtube') {
+        this.showYoutube(this.container, lContent[i].data);
+      }
+      if (lContent[i].type === 'text') {
+        this.showText(this.container, lContent[i].data);
+      }
+      if (lContent[i].type === 'quote') {
+        this.showQuote(this.container, lContent[i].data, lContent[i].attribute);
+      }
+      if (lContent[i].type === 'image') {
+        this.showImage(this.container, lContent[i].data, lContent[i].caption);
+      }
+      if (lContent[i].type === 'heading') {
+        this.showHeading(this.container, lContent[i].data);
+      }
+      if (lContent[i].type === 'list') {
+        this.showList(this.container, lContent[i].data);
+      }
+      if (lContent[i].type === 'code') {
+        this.showCode(this.container, lContent[i].data);
+      }
+    }
   }
 }
 
