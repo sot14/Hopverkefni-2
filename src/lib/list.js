@@ -3,23 +3,8 @@
 import { empty } from './helpers';
 
 let jsonData;
-const lectureItem = ['title', 'category', 'thumbnail'];
+const lectureItems = ['title', 'category', 'thumbnail'];
 let container;
-
-function getHtml() {
-  console.log('Hey!');
-  displayLectureList(container, lectureItem, jsonData.lectures);
-}
-
-function getCSS() {
-  console.log('Hó!');
-}
-
-function getJS() {
-  console.log('hello');
-}
-function displayLectureList() {
-  const element = el;
  
 }
 export default class List {
@@ -30,9 +15,27 @@ export default class List {
     this.jsButton = document.querySelector('.valm__js');
 
   }
-  
+  getHtml() {
+    console.log('Hey!');
+    displayLectureList(jsonData, );
+  }
+
+  getCSS() {
+    console.log('Hó!');
+  }
+
+  getJS() {
+    console.log('hello');
+  }
+
+  displayLectureList(data, items, filter) {
+    data = JSON.parse(data);
+    for (let i = 0; i < data.length; i += 1) {
+
+    }
+    
   load() {
-    // empty(this.container);
+    empty(this.container);
     this.htmlButton.addEventListener('click', getHtml);
     this.cssButton.addEventListener('click', getCSS);
     this.jsButton.addEventListener('click', getJS);
@@ -47,7 +50,7 @@ export default class List {
       })
       .then((data) => {
         jsonData = data;
-        displayLectureList(lectureItem);
+        displayLectureList(lectureItems, jsonData);
       })
       .catch((error) => {
         console.error(error);

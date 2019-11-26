@@ -8,7 +8,7 @@ export default class Lecture {
     this.url = 'lectures.json';
   }
 
-  fetchLecture() {
+  fetchLecture(slug) { // TODO ná í rétt slug
     debugger;
     fetch(this.url)
       .then((res) => {
@@ -17,19 +17,28 @@ export default class Lecture {
         }
         return res.json();
       })
-      /* .then((data) => {
-        this.loadLecture();
-      }) */
+      .then((data) => {
+        let correctLecture;
+        for (let i = 0; i < data.length; i += 1) {
+          if (data.lectures[i].slug === slug) {
+            correctLecture = data.lectures[i];
+          }
+        }
+        if (correctLecture === null) {
+          throw new Error('Fann ekki fyrirlestur');
+        }
+        return correctLecture;
+      })
       .catch((error) => {
         console.error('Villa við að sækja gögn', error);
       });
   }
 
   loadLecture() {
+    const slug = new URLSearchParams(window.location.search.substring(6));
     empty(this.container);
-    const lData = JSON.parse(this.fetchLecture());
+    const lData = JSON.parse(this.fetchLecture(slug)); 
 
-    const lSlug = lData.slug;
     const lTitle = lData.title;
     const lCategory = lData.category;
     let lImage;
@@ -42,10 +51,10 @@ export default class Lecture {
 
     this.displayHeader(lTitle, lImage, lCategory);
     this.displayLecture(lContent);
-    this.displayFooter();
+    this.displayFooter(slug);
   }
 
-  displayHeader(title, image, category) { // ath. kannski hægt að gera aðaldótið í sass og uppfæra innihaldið hér
+  displayHeader(title, image, category) { // ath. þarf kannski að búa til sér header hér
     const header = document.querySelector('header');
     const content = document.querySelector('.header__content');
     if (image != null) {
@@ -59,15 +68,37 @@ export default class Lecture {
     content.appendChild(h);
   }
 
-  displayFooter() {
 
+  displayFooter(slug) {
+    const saved = window.localStorage.getItem(slug);
+
+    const klaraButton = document.createElement('button');
+    klaraButton.addEventListener('click', this.isFinished.bind(this, slug));
+    if (saved) {
+      klaraButton.innerText = '✔ Kláraður fyrirlestur';
+      klaraButton.style.color = '#2d2';
+    } else klaraButton.innerText = 'Klára fyrirlestur';
+     
+    const backButton = document.createElement('button'); // TO DO fara aftur á forsíðu
+    backButton.innerText = 'Til baka';
+    const footer = el('footer', klaraButton, backButton);
+    this.container.appendChild(footer);
+  }
+
+  isFinished(e, slug) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ á fyrirlestur í list
+    const { target } = e;
+    if (target.innerText === 'Klára fyrirlestur') {
+      target.innerText = '✔ Kláraður fyrirlestur';
+      target.style.color = '#2d2';
+      window.localStorage.setItem(slug, slug);
+    } else if (target.innerText === '✔ Kláraður fyrirlestur') {
+      target.innerText = 'Klára fyrirlestur';
+      window.localStorage.removeItem(slug);
+    }
   }
 
   showYoutube(element, source) {
-    /* {
-        "type": "youtube",
-        "data": "https://www.youtube.com/embed/-dC37AYntUQ"
-      }, */
+    
     const div = document.createElement('div');
     const video = document.createElement('iframe');
     video.setAttribute('src', source);
@@ -117,16 +148,6 @@ export default class Lecture {
 
   displayLecture(lContent) {
 
-    /* const types = [
-      'youtube',
-      'text',
-      'quote',
-      'image',
-      'heading',
-      'list',
-      'code',
-    ]; */
-
     for (let i = 0; i < lContent.length; i += 1) {
       if (lContent[i].type === 'youtube') {
         this.showYoutube(this.container, lContent[i].data);
@@ -147,7 +168,7 @@ export default class Lecture {
         this.showList(this.container, lContent[i].data);
       }
       if (lContent[i].type === 'code') {
-        this.showCode(this.container, lContent[i].data)
+        this.showCode(this.container, lContent[i].data);
       }
     }
   }
