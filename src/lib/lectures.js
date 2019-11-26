@@ -56,10 +56,10 @@ export default class Lecture {
     const h = el('h1', title);
     
     content.appendChild(h3);
-    content.appendChild(h);
+    content.appendChild(h1);
   }
 
-  displayFooter() {
+  displayFooter() {  
 
   }
 
