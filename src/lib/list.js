@@ -1,10 +1,7 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-trailing-spaces */ 
-import { empty } from './helpers';
+import { empty, el } from './helpers';
 
-let jsonData;
-const lectureItem = ['title', 'category', 'thumbnail'];
 let container;
+
 
 function getHtml() {
   console.log('Hey!');
@@ -19,8 +16,13 @@ function getJS() {
   console.log('hello');
 }
 function displayLectureList() {
-  const element = el;
- 
+  const lectureItem = ['title', 'category', 'thumbnail'];
+  data = JSON.parse(data);
+  for (let i = 0; i < data.length; i += 1) {
+}
+
+function loadLecture() {
+
 }
 export default class List {
   constructor() {
@@ -30,9 +32,27 @@ export default class List {
     this.jsButton = document.querySelector('.valm__js');
 
   }
-  
+  getHtml() {
+    console.log('Hey!');
+    displayLectureList(jsonData, );
+  }
+
+  getCSS() {
+    console.log('Hó!');
+  }
+
+  getJS() {
+    console.log('hello');
+  }
+
+  displayLectureList(data, items, filter) {
+    data = JSON.parse(data);
+    for (let i = 0; i < data.length; i += 1) {
+
+    }
+    
   load() {
-    // empty(this.container);
+    empty(this.container);
     this.htmlButton.addEventListener('click', getHtml);
     this.cssButton.addEventListener('click', getCSS);
     this.jsButton.addEventListener('click', getJS);
@@ -46,8 +66,7 @@ export default class List {
         return res.json();
       })
       .then((data) => {
-        jsonData = data;
-        displayLectureList(lectureItem);
+        displayLectureList(data);
       })
       .catch((error) => {
         console.error(error);
