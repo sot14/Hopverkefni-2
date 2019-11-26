@@ -32,15 +32,33 @@ export default class List {
     this.jsButton = document.querySelector('.valm__js');
 
   }
-  
+  getHtml() {
+    console.log('Hey!');
+    displayLectureList(jsonData, );
+  }
+
+  getCSS() {
+    console.log('Hó!');
+  }
+
+  getJS() {
+    console.log('hello');
+  }
+
+  displayLectureList(data, items, filter) {
+    data = JSON.parse(data);
+    for (let i = 0; i < data.length; i += 1) {
+
+    }
+    
   load() {
-    //empty(this.container);
-    debugger;
+    empty(this.container);
     this.htmlButton.addEventListener('click', getHtml);
     this.cssButton.addEventListener('click', getCSS);
     this.jsButton.addEventListener('click', getJS);
 
-    fetch('./lectures.json')
+    debugger;
+    fetch('./lectures.json')  
       .then((res) => {
         if (!res.ok) {
           throw new Error('Villa við að sækja fyrirlestur');

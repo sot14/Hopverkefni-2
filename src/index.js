@@ -10,8 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (isLecturePage) {
     const lecture = new Lecture();
     lecture.loadLecture();
+<<<<<<< HEAD
 
   }else {
+=======
+  } else {
+>>>>>>> eee732332c6f4981eb01bdeaad6074eecc0af1ea
     const list = new List();
     list.load();
   }
