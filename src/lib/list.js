@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
 import { empty, el } from './helpers';
+import  Lecture  from './lectures';
 
 let jsonData;
 
@@ -25,19 +26,29 @@ export default class List {
     console.log('hello');
     this.filterLectureList(jsonData, 'javascript');
   }
+  clickLecture(e) {
+    const { target } = e;
+    const slug = target.getAttribute('id');
+    const lecture = new Lecture();
+    lecture.loadLecture(slug);
+  }
 
   displayLectureList(data) {
     empty(this.container);
-    for (let i = 0; i < data.lectures.length;) {
-      const element = ('div', this.displayLecListItem(data.lectures[i]));
+    for (let i = 0; i < data.lectures.length; i += 1) {
+      const element = el('div', this.displayLecListItem(data.lectures[i]));
+      element.classList.add('list__page');
+      element.setAttribute('id', `${data.lectures[i].slug}`);
       this.container.appendChild(element);
+      element.addEventListener('click', this.clickLecture);
     }
   }
-
+  
   displayLecListItem(item) {
+  
     const title = el('h2', item.title);
     title.classList.add('list__title');
-
+    
     const category = el('span', item.category);
     category.classList.add('list__category');
 
@@ -46,12 +57,14 @@ export default class List {
 
     if (item.thumbnail) {
       const image = document.createElement('img');
-      image.setAttribute = ('src', item.thumbnail);
+      image.src = `./${item.thumbnail}`;
       divImage.appendChild(image);
     }
-    const lectureItem = el('div', title, category, divImage);
+    const lectureItem = el('a', title, category, divImage);
     lectureItem.setAttribute('href', `fyrirlestur.html?slug=${item.slug}`);
+    
     return lectureItem;
+  
   }
 
 
@@ -72,7 +85,6 @@ export default class List {
     this.cssButton.addEventListener('click', this.getCSS);
     this.jsButton.addEventListener('click', this.getJS);
 
-    debugger;
     fetch('./lectures.json')
       .then((res) => {
         if (!res.ok) {
@@ -81,7 +93,6 @@ export default class List {
         return res.json();
       })
       .then((data) => {
-        debugger;
         this.displayLectureList(data);
       })
       .catch((error) => {
