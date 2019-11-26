@@ -68,10 +68,6 @@ export default class Lecture {
     content.appendChild(h1);
   }
 
-<<<<<<< HEAD
-  displayFooter() {  
-=======
->>>>>>> 84eb08e1969779af8902f24c22b861ffd4f782db
 
   displayFooter(slug) {
     const saved = window.localStorage.getItem(slug);

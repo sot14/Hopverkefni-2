@@ -33,7 +33,7 @@ header {
 
     }
 }
-.lectures {
+.list {
     display: grid;
     max-width: 1200px;
     grid-template-columns: 1fr 1fr 1fr;
@@ -41,7 +41,7 @@ header {
     margin: auto;
     margin-bottom: 3em;
 
-    .lecture__page{
+    .list_page{
         border: 2px solid black;
         height: 300px;
         margin-top:$gutter;
