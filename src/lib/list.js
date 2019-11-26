@@ -28,32 +28,30 @@ export default class List {
 
   displayLectureList(data) {
     empty(this.container);
-    const div = el('div', 'halló');
-    this.container.appendChild(div);
     for (let i = 0; i < data.lectures.length;) {
       const element = ('div', this.displayLecListItem(data.lectures[i]));
       this.container.appendChild(element);
     }
-
   }
 
   displayLecListItem(item) {
-    const title = el('div', item.title);
+    const title = el('h2', item.title);
     title.classList.add('list__title');
 
-    const category = el('div', item.category);
+    const category = el('span', item.category);
     category.classList.add('list__category');
 
     const divImage = document.createElement('div');
+    divImage.classList.add('list__image');
 
     if (item.thumbnail) {
       const image = document.createElement('img');
-      image.src = item.thumbnail;
+      image.setAttribute = ('src', item.thumbnail);
       divImage.appendChild(image);
     }
     const lectureItem = el('div', title, category, divImage);
+    lectureItem.setAttribute('href', `fyrirlestur.html?slug=${item.slug}`);
     return lectureItem;
-    
   }
 
 
@@ -101,5 +99,5 @@ export default class List {
     "category": "html",
     "image": "img/code.jpg",
     "thumbnail": "img/thumb1.jpg",
-    "content": [
-*/
+    "content":
+*/ 
