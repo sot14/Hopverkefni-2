@@ -28,7 +28,19 @@ export default class List {
 
   displayLectureList(data) {
     empty(this.container);
+    const div = el('div', 'halló');
+    this.container.appendChild(div);
+    for (let i = 0; i < data.length;) {
+      const element = ('div', this.displayLecListItem(data.lectures[i]));
+      this.container.appendChild(element);
+    }
+
   }
+
+  displayLecListItem(item) {
+    const thumb = item.thumbnail;
+  }
+
 
   filterLectureList(data, filter) {
     let lectures;
@@ -57,6 +69,7 @@ export default class List {
       })
       .then((data) => {
         jsonData = JSON.parse(data);
+        this.displayLectureList(jsonData);
       })
       .catch((error) => {
         console.error(error);
