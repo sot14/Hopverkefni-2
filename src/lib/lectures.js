@@ -19,30 +19,6 @@ export default class Lecture {
       .then((data) => {
       this.loadLecture(data);
       });
-  
-    
-    /*return fetch(this.url)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Villa við að sækja fyrirlestur');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        const correctLecture = data.lectures.find(correct => correct.slug === slug);
-        for (let i = 0; i < data.length; i += 1) {
-          if (data.lectures[i].slug === slug) {
-            correctLecture = data.lectures[i];
-          }
-        }
-        if (!correctLecture) {
-          throw new Error('Fann ekki fyrirlestur');
-        }
-        return correctLecture;
-      })
-      .catch((error) => {
-        console.error('Villa við að sækja gögn', error);
-      });*/
   }
 
   loadLecture(data) {
