@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (isLecturePage) {
     const lecture = new Lecture();
-    lecture.loadLecture();
+    lecture.fetchLecture();
   } else {
     const list = new List();
     list.load();

@@ -8,46 +8,35 @@ export default class Lecture {
     this.url = './lectures.json';
   }
 
-  fetchLecture(slug) { // TODO ná í rétt slug
-    debugger;
-    fetch(this.url)
+  fetchLecture() { // TODO ná í rétt slug
+     fetch(this.url)
       .then((res) => {
         if (!res.ok) {
-          throw new Error('Villa við að sækja fyrirlestur');
+          throw new Error('Gat ekki sótt fyrirlestra');
         }
         return res.json();
       })
       .then((data) => {
-        let correctLecture;
-        for (let i = 0; i < data.length; i += 1) {
-          if (data.lectures[i].slug === slug) {
-            correctLecture = data.lectures[i];
-          }
-        }
-        if (!correctLecture) {
-          throw new Error('Fann ekki fyrirlestur');
-        }
-        return correctLecture;
-      })
-      .catch((error) => {
-        console.error('Villa við að sækja gögn', error);
+      this.loadLecture(data);
       });
   }
 
-  loadLecture(slug) {
-    // const slug = new URLSearchParams(window.location.search.substring(6));
-    empty(this.container);
-    const lData = JSON.parse(this.fetchLecture(slug)); 
+  loadLecture(data) {
+    const slug = window.location.search.substring(6);
+    const lData = data;
+    let correctLecture;
+    for (let i = 0; i < lData.lectures.length; i += 1) {
+      if (lData.lectures[i].slug === slug) correctLecture = lData.lectures[i];
+    }
 
-    const lTitle = lData.title;
-    const lCategory = lData.category;
+    const lTitle = correctLecture.title;
+    const lCategory = correctLecture.category;
     let lImage;
-    if (lData.image) {
-      lImage = `url('${lData.image}')`;
+    if (correctLecture.image) {
+      lImage = correctLecture.image;
     } else lImage = null;
     
-    // const lThumbnail = url(`${lData.thumbnail}`);
-    const lContent = lData.content;
+    const lContent = correctLecture.content;
 
     this.displayHeader(lTitle, lImage, lCategory);
     this.displayLecture(lContent);
@@ -70,6 +59,7 @@ export default class Lecture {
 
 
   displayFooter(slug) {
+    debugger;
     const saved = window.localStorage.getItem(slug);
 
     const klaraButton = document.createElement('button');
@@ -86,7 +76,8 @@ export default class Lecture {
   }
 
   isFinished(e, slug) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ á fyrirlestur í list
-    const { target } = e;
+    debugger;
+    const target = e;
     if (target.innerText === 'Klára fyrirlestur') {
       target.innerText = '✔ Kláraður fyrirlestur';
       target.style.color = '#2d2';
