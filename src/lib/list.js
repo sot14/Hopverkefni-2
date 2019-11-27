@@ -27,10 +27,9 @@ export default class List {
     this.filterLectureList(jsonData, 'javascript');
   }
   clickLecture(e) {
-    const { target } = e;
-    const slug = target.getAttribute('id');
+    debugger;
     const lecture = new Lecture();
-    lecture.loadLecture(slug);
+    lecture.fetchLecture();
   }
 
   displayLectureList(data) {

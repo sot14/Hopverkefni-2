@@ -8,9 +8,21 @@ export default class Lecture {
     this.url = './lectures.json';
   }
 
-  fetchLecture(slug) { // TODO ná í rétt slug
+  fetchLecture() { // TODO ná í rétt slug
     debugger;
-    fetch(this.url)
+     fetch(this.url)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Gat ekki sótt fyrirlestra');
+        }
+        return res.json();
+      })
+      .then((data) => {
+      this.loadLecture(data);
+      });
+  
+    
+    /*return fetch(this.url)
       .then((res) => {
         if (!res.ok) {
           throw new Error('Villa við að sækja fyrirlestur');
@@ -18,7 +30,7 @@ export default class Lecture {
         return res.json();
       })
       .then((data) => {
-        let correctLecture;
+        const correctLecture = data.lectures.find(correct => correct.slug === slug);
         for (let i = 0; i < data.length; i += 1) {
           if (data.lectures[i].slug === slug) {
             correctLecture = data.lectures[i];
@@ -31,23 +43,26 @@ export default class Lecture {
       })
       .catch((error) => {
         console.error('Villa við að sækja gögn', error);
-      });
+      });*/
   }
 
-  loadLecture() {
-    const slug = new URLSearchParams(window.location.search.substring(6));
-    empty(this.container);
-    const lData = JSON.parse(this.fetchLecture(slug)); 
+  loadLecture(data) {
+    debugger;
+    const slug = window.location.search.substring(6);
+    const lData = data;
+    let correctLecture;
+    for (let i = 0; i < lData.lectures.length; i += 1) {
+      if (lData.lectures[i].slug === slug) correctLecture = lData.lectures[i];
+    }
 
-    const lTitle = lData.title;
-    const lCategory = lData.category;
+    const lTitle = correctLecture.title;
+    const lCategory = correctLecture.category;
     let lImage;
-    if (lData.image) {
-      lImage = `url('${lData.image}')`;
+    if (correctLecture.image) {
+      lImage = correctLecture.image;
     } else lImage = null;
     
-    // const lThumbnail = url(`${lData.thumbnail}`);
-    const lContent = lData.content;
+    const lContent = correctLecture.content;
 
     this.displayHeader(lTitle, lImage, lCategory);
     this.displayLecture(lContent);
