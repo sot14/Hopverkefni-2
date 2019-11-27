@@ -9,7 +9,6 @@ export default class Lecture {
   }
 
   fetchLecture() { // TODO ná í rétt slug
-    debugger;
      fetch(this.url)
       .then((res) => {
         if (!res.ok) {
@@ -47,7 +46,6 @@ export default class Lecture {
   }
 
   loadLecture(data) {
-    debugger;
     const slug = window.location.search.substring(6);
     const lData = data;
     let correctLecture;
@@ -85,6 +83,7 @@ export default class Lecture {
 
 
   displayFooter(slug) {
+    debugger;
     const saved = window.localStorage.getItem(slug);
 
     const klaraButton = document.createElement('button');
@@ -101,7 +100,8 @@ export default class Lecture {
   }
 
   isFinished(e, slug) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ á fyrirlestur í list
-    const { target } = e;
+    debugger;
+    const target = e;
     if (target.innerText === 'Klára fyrirlestur') {
       target.innerText = '✔ Kláraður fyrirlestur';
       target.style.color = '#2d2';

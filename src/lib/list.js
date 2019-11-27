@@ -11,34 +11,29 @@ export default class List {
     this.htmlButton = document.querySelector('.valm__html');
     this.cssButton = document.querySelector('.valm__css');
     this.jsButton = document.querySelector('.valm__js');
+    this.data = jsonData;
+    this.filtered = jsonData;
   }
 
   getHtml() {
-    console.log('Hey!');
-    this.filterLectureList(jsonData, 'html');
+    this.filtered = this.data.filter((lecture) => lecture.category === html);
   }
 
   getCSS() {
-    console.log('Hó!');
-    this.filterLectureList(jsonData, 'css');
+    console.log('Hó!', this);
+    const css = 'css'
+    this.filterLectureList(jsonData, css);
   }
 
   getJS() {
     console.log('hello');
-    this.filterLectureList(jsonData, 'javascript');
+    const js = 'js';
+    this.filterLectureList(jsonData, js);
   }
+
   clickLecture(e) {
-    debugger;
     const lecture = new Lecture();
     lecture.fetchLecture();
-  }
-
-  clickLecture(e) {
-    const { target } = e;
-    const slug = target.getAttribute('id');
-    const lecture = new Lecture();
-    lecture.loadLecture(slug);
-
   }
 
   displayLectureList(data) {
@@ -65,7 +60,7 @@ export default class List {
 
     if (item.thumbnail) {
       const image = document.createElement('img');
-      image.setAttribute = ('src', `./${item.thumbnail}`);
+      image.src = `./${item.thumbnail}`;
       divImage.appendChild(image);
     }
     const lectureItem = el('a', title, category, divImage);
@@ -76,13 +71,10 @@ export default class List {
 
 
   filterLectureList(data, filter) {
+    const filtered = data.filter(lecture => lecture.category === filter)
     let fLectures;
-    for (let i = 0; i < data.length; i += 1) {
-      if (data.lectures[i].category === filter) {
-        fLectures += data.lectures[i];
-      }
-    }
-    this.displayLectureList(fLectures);
+
+    this.displayLectureList(filtered);
   }
 
 
@@ -100,6 +92,7 @@ export default class List {
         return res.json();
       }) 
       .then((data) => {
+        jsonData = data;
         this.displayLectureList(data);
       })
       .catch((error) => {
