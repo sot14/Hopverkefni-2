@@ -46,44 +46,43 @@ export default class List {
     empty(this.container);
     for (let i = 0; i < data.lectures.length; i += 1) {
       const element = el('div', this.displayLecListItem(data.lectures[i]));
-<<<<<<< HEAD
-      element.classList.add('list')
-=======
       element.classList.add('list__page');
->>>>>>> 0b442d6418175b11341627efd3ea996e732c8bc1
       element.setAttribute('id', `${data.lectures[i].slug}`);
       this.container.appendChild(element);
       element.addEventListener('click', this.clickLecture);
+      
     }
   }
   
   displayLecListItem(item) {
+
   
     const title = el('h2', item.title);
     title.classList.add('list__title');
     
-    const category = el('span', item.category);
+    const category = el('div', item.category);
     category.classList.add('list__category');
+
+    const description=el('div',title,category);
+    description.classList.add('list__description')
 
     const divImage = document.createElement('div');
     divImage.classList.add('list__image');
 
+    const content=el('div',description,divImage,);
+    content.classList.add('list__content');
+    
+
     if (item.thumbnail) {
       const image = document.createElement('img');
-<<<<<<< HEAD
-      image.setAttribute = ('src', `./${item.thumbnail}`);
-=======
       image.src = `./${item.thumbnail}`;
->>>>>>> 0b442d6418175b11341627efd3ea996e732c8bc1
       divImage.appendChild(image);
     }
-    const lectureItem = el('a', title, category, divImage);
+    const lectureItem = el('a', content);
     lectureItem.setAttribute('href', `fyrirlestur.html?slug=${item.slug}`);
-<<<<<<< HEAD
-
-=======
     
->>>>>>> 0b442d6418175b11341627efd3ea996e732c8bc1
+
+    
     return lectureItem;
   
   }
