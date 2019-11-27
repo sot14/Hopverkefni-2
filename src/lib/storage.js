@@ -33,3 +33,4 @@ function list(type,...data){
   item.classList.add('list__page');
   
 }
+

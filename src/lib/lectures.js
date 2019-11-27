@@ -91,6 +91,7 @@ export default class Lecture {
   showYoutube(element, source) {
     
     const div = document.createElement('div');
+    div.classList.add('lecture__video')
     const video = document.createElement('iframe');
     video.setAttribute('src', source);
 
@@ -137,7 +138,7 @@ export default class Lecture {
   }
 
 
-  displayLecture(lContent) {
+  displayLecture(lContent) { //nota möguelga switch eða else if
 
     for (let i = 0; i < lContent.length; i += 1) {
       if (lContent[i].type === 'youtube') {

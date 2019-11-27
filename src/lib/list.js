@@ -5,7 +5,7 @@ import Lecture from './lectures';
 
 let jsonData;
 
-export default class List {
+export default class List { //muna tak ef ekki ID
   constructor() {
     this.container = document.querySelector('.list');
     this.htmlButton = document.querySelector('.valm__html');
@@ -16,9 +16,11 @@ export default class List {
     this.getHtml.bind(this);
     this.getCSS.bind(this);
     this.getJS.bind(this);
+    this.setupFilters();
   }
 
   getHtml() {
+    console.log()
     const fHtml = this.data.filter((lecture) => lecture.category === 'html');
     this.htmlButton.classList.toggle('valm__html--filter');
     if (this.htmlButton.className === 'valm__html') {
@@ -43,6 +45,15 @@ export default class List {
       this.filtered += fJS;
     } else this.filtered -= fJS;
     this.displayLectureList(this.filtered);
+  }
+
+  setupFilters(){
+    const filters=document.getElementsByClassName('valm');
+    for (let filter of filters){
+      filter.addEventListener("click",(e) => {
+        e.target.classList.toggle('val-active');
+      })
+    }
   }
 
   clickLecture() {

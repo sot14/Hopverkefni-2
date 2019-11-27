@@ -5,6 +5,7 @@ header {
     background-repeat: no-repeat;
     background-size: 100%;
     justify-content: center;
+
     .h__container {
         background-size: cover;
         display: flex;
@@ -30,16 +31,14 @@ header {
 }
 .list {
     display: grid;
-    max-width: 1200px;
+    max-width: $max-width;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap:$gutter;
     margin: auto;
     margin-bottom: 3em;
     .list__page{
-        // border: 2px solid black;
         height: 300px;
-        margin-bottom:$gutter;
-        background: $darkgrey;
+        margin-bottom:$gutter*2;
         a{
             text-decoration: none;
             .list__content{
@@ -49,22 +48,27 @@ header {
                 width: 100%;
                 height: 100%;
                 align-self: flex-end;
+                background: $lightgrey;
+
+                &:hover {
+                    background-color: #aaa;
+                    transition: 0.3s ease-in-out;
+                  }
                 .list__description{
-                    background:$darkgrey;
                     font-family: $font-header;
                     padding:0.5em;
                     display: flex;
                     flex-direction: column-reverse;
                     .list__title{
                         line-height: 1em;
-                        font-size: 2em;
+                        font-size: $medium;
                    }
                }
                 .list__image{
                     height:100%;
                     img{
                         max-height: 100%;
-                        width: 100%;
+                        max-width: 100%;
                    }
                }
            }
@@ -75,18 +79,27 @@ header {
     display: flex;
     margin: $gutter 12em $gutter 12em;
     justify-content: center;
-    .valmynd__takkar {
-        .valm__html, .valm__css, .valm__js {
+    /*.valmynd__takkar {*/
+        .valm {
             padding: $gutter*0.5;
             background:$lightgrey;
             border-radius: 10px;
             font-family: $font-header;
             font-weight: bold;
+            cursor: pointer;
+
+            &:hover{
+                background-color: $darkgrey;
+                transition: 0.3s ease-in-out;
+            }
        }
-        .valm__html:hover , .valm__css:hover , .valm__js:hover {
-            background-color: $darkgrey;
-            transition: 0.5s ease;
+  /* }*/
+   .val-active{
+       background:$green;
+       &:hover{ 
+        background-color:$green;
        }
+
    }
 }
 @media(max-width:600px){
