@@ -8,7 +8,8 @@ let jsonData;
 export default class List {
   constructor() {
     this.container = document.querySelector('.list');
-    this.htmlButton = document.querySelector('.valm__html');
+
+    this.htmlButton = document.querySelectorAll('.filter--active');
     this.cssButton = document.querySelector('.valm__css');
     this.jsButton = document.querySelector('.valm__js');
     this.data = jsonData;
