@@ -34,8 +34,8 @@ export default class Lecture {
       });
   }
 
-  loadLecture() {
-    const slug = new URLSearchParams(window.location.search.substring(6));
+  loadLecture(slug) {
+    // const slug = new URLSearchParams(window.location.search.substring(6));
     empty(this.container);
     const lData = JSON.parse(this.fetchLecture(slug)); 
 
