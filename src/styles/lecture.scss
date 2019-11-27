@@ -1,0 +1,9 @@
+.lecture{
+    display: grid;
+    max-width: $max-width;
+    grid-template-columns: 1fr;
+    column-gap:$gutter;
+    margin: auto;
+    margin-bottom: 3em;
+
+}

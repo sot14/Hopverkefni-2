@@ -3,47 +3,23 @@
 import { empty, el } from './helpers';
 import Lecture from './lectures';
 
-let jsonData;
-
-export default class List {
+export default class List { //muna tak ef ekki ID
   constructor() {
     this.container = document.querySelector('.list');
 
     this.htmlButton = document.querySelectorAll('.filter--active');
     this.cssButton = document.querySelector('.valm__css');
     this.jsButton = document.querySelector('.valm__js');
-    this.data = jsonData;
-    this.filtered = jsonData;
-    this.getHtml.bind(this);
-    this.getCSS.bind(this);
-    this.getJS.bind(this);
+    this.setupFilters();
   }
 
-  getHtml() {
-    const fHtml = this.data.filter((lecture) => lecture.category === 'html');
-    this.htmlButton.classList.toggle('valm__html--filter');
-    if (this.htmlButton.className === 'valm__html') {
-      this.filtered += fHtml;
-    } else this.filtered -= fHtml;
-    this.displayLectureList(this.filtered);
-  }
-
-  getCSS() {
-    const fCSS = this.data.filter((lecture) => lecture.category === 'css');
-    this.cssButton.classList.toggle('valm__css--filter');
-    if (this.cssButton.className === 'valm__css') {
-      this.filtered += fCSS;
-    } else this.filtered -= fCSS;
-    this.displayLectureList(this.filtered);
-  }
-
-  getJS() {
-    const fJS = this.data.filter((lecture) => lecture.category === 'javascript');
-    this.jsButton.classList.toggle('valm__js--filter');
-    if (this.jsButton.className === 'valm__js') {
-      this.filtered += fJS;
-    } else this.filtered -= fJS;
-    this.displayLectureList(this.filtered);
+  setupFilters(){
+    const filters=document.getElementsByClassName('valm');
+    for (let filter of filters){
+      filter.addEventListener("click",(e) => {
+        e.target.classList.toggle('val-active');
+      })
+    }
   }
 
   clickLecture() {
@@ -53,11 +29,13 @@ export default class List {
 
   displayLectureList(data) {
     empty(this.container);
-    for (let i = 0; i < data.lectures.length; i += 1) {
-      const element = el('div', this.displayLecListItem(data.lectures[i]));
+    console.log(data);
+    for (let i = 0; i < data.length; i += 1) {
+      const element = el('div', this.displayLecListItem(data[i]));
       element.classList.add('list__page');
       this.container.appendChild(element);
       element.addEventListener('click', this.clickLecture);
+      
     }
   }
 
@@ -68,15 +46,22 @@ export default class List {
     const category = el('span', item.category);
     category.classList.add('list__category');
 
+    const description=el('div',title,category);
+    description.classList.add('list__description')
+
     const divImage = document.createElement('div');
     divImage.classList.add('list__image');
+
+    const content=el('div',description,divImage,);
+    content.classList.add('list__content');
+    
 
     if (item.thumbnail) {
       const image = document.createElement('img');
       image.src = `./${item.thumbnail}`;
       divImage.appendChild(image);
     }
-    const lectureItem = el('a', title, category, divImage);
+    const lectureItem = el('a', content);
     lectureItem.setAttribute('href', `fyrirlestur.html?slug=${item.slug}`);
     return lectureItem;
   }
@@ -92,12 +77,26 @@ export default class List {
     this.displayLectureList(fLectures);
   }
 
+  filter() {
+    const categories = document.getElementsByClassName('val-active');
+    const filtered = []; 
+
+    if (categories.length===0){
+      return this.displayLectureList(this.data);
+    }
+    for (let category of categories) {
+      filtered.push(...this.data.filter(lecture => lecture.category === category.dataset.category))
+      //....spread operator 
+      
+    }
+    this.displayLectureList(filtered);
+  } 
 
   load() {
     empty(this.container);
-    this.htmlButton.addEventListener('click', this.getHtml);
-    this.cssButton.addEventListener('click', this.getCSS);
-    this.jsButton.addEventListener('click', this.getJS);
+    this.htmlButton.addEventListener('click', this.filter.bind(this));
+    this.cssButton.addEventListener('click', this.filter.bind(this));
+    this.jsButton.addEventListener('click', this.filter.bind(this));
 
     fetch('./lectures.json')
       .then((res) => {
@@ -107,8 +106,8 @@ export default class List {
         return res.json();
       })
       .then((data) => {
-        this.data = data;
-        this.displayLectureList(data);
+        this.data = data.lectures;
+        this.displayLectureList(this.data);
       })
       .catch((error) => {
         console.error(error);

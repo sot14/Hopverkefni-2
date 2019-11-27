@@ -27,3 +27,10 @@ export function save(slug) {
 export function clear() {
   localStorage.removeItem(LOCALSTORAGE_KEY);
 }
+//styles
+function list(type,...data){
+  const item=el('div,...data');
+  item.classList.add('list__page');
+  
+}
+
