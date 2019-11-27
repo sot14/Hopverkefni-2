@@ -9,10 +9,6 @@ export default class Lecture {
   }
 
   fetchLecture() { // TODO ná í rétt slug
-<<<<<<< HEAD
-    empty(this.container);
-=======
->>>>>>> 7129671114e4eb9b1ab76c277989f79e8e6681ad
     debugger;
      fetch(this.url)
       .then((res) => {
@@ -24,46 +20,12 @@ export default class Lecture {
       .then((data) => {
       this.loadLecture(data);
       });
-  
-    
-    /*return fetch(this.url)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Villa við að sækja fyrirlestur');
-        }
-        return res.json();
-      })
-      .then((data) => {
-<<<<<<< HEAD
-        this.loadLecture(data);
-=======
-        const correctLecture = data.lectures.find(correct => correct.slug === slug);
-        for (let i = 0; i < data.length; i += 1) {
-          if (data.lectures[i].slug === slug) {
-            correctLecture = data.lectures[i];
-          }
-        }
-        if (!correctLecture) {
-          throw new Error('Fann ekki fyrirlestur');
-        }
-        return correctLecture;
->>>>>>> 7129671114e4eb9b1ab76c277989f79e8e6681ad
-      })
-      .catch((error) => {
-        console.error('Villa við að sækja gögn', error);
-      });*/
   }
 
   loadLecture(data) {
-<<<<<<< HEAD
-    
-    const slug = window.location.search.substring(6); 
-    const lData = JSON.stringify(data);
-=======
     debugger;
     const slug = window.location.search.substring(6);
     const lData = data;
->>>>>>> 7129671114e4eb9b1ab76c277989f79e8e6681ad
     let correctLecture;
     for (let i = 0; i < lData.lectures.length; i += 1) {
       if (lData.lectures[i].slug === slug) correctLecture = lData.lectures[i];
