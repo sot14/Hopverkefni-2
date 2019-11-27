@@ -27,7 +27,7 @@ export default class List {
     console.log('hello');
     this.filterLectureList(jsonData, 'javascript');
   }
-
+  
   clickLecture() {
     const lecture = new Lecture();
     lecture.fetchLecture();
@@ -38,7 +38,6 @@ export default class List {
     for (let i = 0; i < data.lectures.length; i += 1) {
       const element = el('div', this.displayLecListItem(data.lectures[i]));
       element.classList.add('list__page');
-      // element.setAttribute('id', `${data.lectures[i].slug}`);
       this.container.appendChild(element);
       element.addEventListener('click', this.clickLecture);
     }
@@ -61,7 +60,6 @@ export default class List {
     }
     const lectureItem = el('a', title, category, divImage);
     lectureItem.setAttribute('href', `fyrirlestur.html?slug=${item.slug}`);
-
     return lectureItem;
   }
 
