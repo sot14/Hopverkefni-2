@@ -8,7 +8,8 @@ export default class Lecture {
     this.url = './lectures.json';
   }
 
-  fetchLecture(slug) { // TODO ná í rétt slug
+  fetchLecture() { // TODO ná í rétt slug
+    empty(this.container);
     debugger;
     fetch(this.url)
       .then((res) => {
@@ -18,36 +19,30 @@ export default class Lecture {
         return res.json();
       })
       .then((data) => {
-        let correctLecture;
-        for (let i = 0; i < data.length; i += 1) {
-          if (data.lectures[i].slug === slug) {
-            correctLecture = data.lectures[i];
-          }
-        }
-        if (!correctLecture) {
-          throw new Error('Fann ekki fyrirlestur');
-        }
-        return correctLecture;
+        this.loadLecture(data);
       })
       .catch((error) => {
         console.error('Villa við að sækja gögn', error);
       });
   }
 
-  loadLecture(slug) {
-    // const slug = new URLSearchParams(window.location.search.substring(6));
-    empty(this.container);
-    const lData = JSON.parse(this.fetchLecture(slug)); 
+  loadLecture(data) {
+    
+    const slug = window.location.search.substring(6); 
+    const lData = JSON.stringify(data);
+    let correctLecture;
+    for (let i = 0; i < lData.lectures.length; i += 1) {
+      if (lData.lectures[i].slug === slug) correctLecture = lData.lectures[i];
+    }
 
-    const lTitle = lData.title;
-    const lCategory = lData.category;
+    const lTitle = correctLecture.title;
+    const lCategory = correctLecture.category;
     let lImage;
-    if (lData.image) {
-      lImage = `url('${lData.image}')`;
+    if (correctLecture.image) {
+      lImage = correctLecture.image;
     } else lImage = null;
     
-    // const lThumbnail = url(`${lData.thumbnail}`);
-    const lContent = lData.content;
+    const lContent = correctLecture.content;
 
     this.displayHeader(lTitle, lImage, lCategory);
     this.displayLecture(lContent);

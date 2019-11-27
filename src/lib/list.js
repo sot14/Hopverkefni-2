@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 
 import { empty, el } from './helpers';
-import  Lecture  from './lectures';
+import Lecture from './lectures';
 
 let jsonData;
 
@@ -27,41 +27,27 @@ export default class List {
     console.log('hello');
     this.filterLectureList(jsonData, 'javascript');
   }
-  clickLecture(e) {
-    const { target } = e;
-    const slug = target.getAttribute('id');
-    const lecture = new Lecture();
-    lecture.loadLecture(slug);
-  }
 
-  clickLecture(e) {
-    const { target } = e;
-    const slug = target.getAttribute('id');
+  clickLecture() {
     const lecture = new Lecture();
-    lecture.loadLecture(slug);
-
+    lecture.fetchLecture();
   }
 
   displayLectureList(data) {
     empty(this.container);
     for (let i = 0; i < data.lectures.length; i += 1) {
       const element = el('div', this.displayLecListItem(data.lectures[i]));
-<<<<<<< HEAD
-      element.classList.add('list')
-=======
       element.classList.add('list__page');
->>>>>>> 0b442d6418175b11341627efd3ea996e732c8bc1
-      element.setAttribute('id', `${data.lectures[i].slug}`);
+      // element.setAttribute('id', `${data.lectures[i].slug}`);
       this.container.appendChild(element);
       element.addEventListener('click', this.clickLecture);
     }
   }
-  
+
   displayLecListItem(item) {
-  
     const title = el('h2', item.title);
     title.classList.add('list__title');
-    
+
     const category = el('span', item.category);
     category.classList.add('list__category');
 
@@ -70,22 +56,13 @@ export default class List {
 
     if (item.thumbnail) {
       const image = document.createElement('img');
-<<<<<<< HEAD
-      image.setAttribute = ('src', `./${item.thumbnail}`);
-=======
       image.src = `./${item.thumbnail}`;
->>>>>>> 0b442d6418175b11341627efd3ea996e732c8bc1
       divImage.appendChild(image);
     }
     const lectureItem = el('a', title, category, divImage);
     lectureItem.setAttribute('href', `fyrirlestur.html?slug=${item.slug}`);
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 0b442d6418175b11341627efd3ea996e732c8bc1
     return lectureItem;
-  
   }
 
 
@@ -112,8 +89,9 @@ export default class List {
           throw new Error('Villa við að sækja fyrirlestur');
         }
         return res.json();
-      }) 
+      })
       .then((data) => {
+        jsonData = data;
         this.displayLectureList(data);
       })
       .catch((error) => {
@@ -132,4 +110,4 @@ export default class List {
     "image": "img/code.jpg",
     "thumbnail": "img/thumb1.jpg",
     "content":
-*/ 
+*/
