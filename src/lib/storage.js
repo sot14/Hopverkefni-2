@@ -1,29 +1,31 @@
 /* eslint-disable linebreak-style */
-/*
- * Sækir og vistar í localStorage
-*/
+/* eslint-disable no-trailing-spaces */
 
-// Fast sem skilgreinir heiti á lykli sem vistað er undir í localStorage
-const LOCALSTORAGE_KEY = 'lecture_data';
-
+const LOCALSTORAGE_KEY = 'saved-lectures';
 
 export function load() {
-  const lectureJson = localStorage.getItem(LOCALSTORAGE_KEY);
-  const lecture = JSON.parse(lectureJson) || [];
+  const lecturesJson = localStorage.getItem(LOCALSTORAGE_KEY);
+  const lectures = JSON.parse(lecturesJson) || [];
 
-  return lecture;
+  return lectures;
 }
 
-export function save(slug) {
-  const lecture = load();
-  lecture.push(slug);
+ export function save(slug) {
+//includes slug, splice, push, 
+  const lectures = load();
+  const store = lectures.indexOf(slug);
+    
+  if (store >= 0) {
+    lectures.splice(store, 1);
+  } else {
+    lectures.push(slug);
+  }
 
-  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(lecture));
-}
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(lectures));
+} 
 
-/**
- * Hreinsar alla lectures úr localStorage
- */
-export function clear() {
-  localStorage.removeItem(LOCALSTORAGE_KEY);
-}
+/*export default function getSavedLecture(data) {
+  const savedLecture = localStorage.getItem(data.slug);
+  if (!savedLecture) return null;
+  return savedLecture;
+}*/

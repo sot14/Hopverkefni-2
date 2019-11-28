@@ -1,14 +1,14 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable linebreak-style */
 import { el, empty } from './helpers';
-
+import { load, save } from './storage';
 export default class Lecture {
   constructor() {
     this.container = document.querySelector('.lecture');
     this.url = './lectures.json';
   }
 
-  fetchLecture() { // TODO ná í rétt slug
+  fetchLecture() {
     fetch(this.url)
       .then((res) => {
         if (!res.ok) {
@@ -22,7 +22,9 @@ export default class Lecture {
   }
 
   loadLecture(data) {
-    const slug = window.location.search.substring(6);
+    const params = (new URL(document.location)).searchParams;
+    const slug = params.get('slug');
+    this.slug = slug;
     const lData = data;
     let correctLecture;
     for (let i = 0; i < lData.lectures.length; i += 1) {
@@ -61,30 +63,37 @@ export default class Lecture {
   displayFooter(slug) {
     debugger;
     const saved = window.localStorage.getItem(slug);
-
     const klaraButton = document.createElement('button');
     klaraButton.addEventListener('click', this.isFinished.bind(this, slug));
     if (saved) {
       klaraButton.textContent = '✔ Kláraður fyrirlestur';
-      klaraButton.style.color = '#2d2';
-    } else klaraButton.textContent = 'Klára fyrirlestur';
-     
-    const backButton = document.createElement('button'); // TO DO fara aftur á forsíðu
-    backButton.textContent = 'Til baka';
-    const footer = el('footer', klaraButton, backButton);
-    this.container.appendChild(footer);
+      klaraButton.classList.add('button__klarad--active');
+      klaraButton.style.color = '#2d2'; 
+    } else {
+      klaraButton.textContent = 'Klára fyrirlestur';
+      klaraButton.classList.add('button__klarad');
   }
 
-  isFinished(e, slug) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ á fyrirlestur í list
+    const backButton = el('a', 'Til baka');
+    backButton.setAttribute('href', '/');
+    backButton.classList.add('button__back');
+    const content = document.querySelector('.lecture-footer');
+    content.appendChild(klaraButton);
+    content.appendChild(backButton);
+  }
+
+  isFinished(slug, e) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ á fyrirlestur í list
     debugger;
+
     if (e.target.textContent === 'Klára fyrirlestur') {
       e.target.textContent = '✔ Kláraður fyrirlestur';
       e.target.style.color = '#2d2';
-      window.localStorage.setItem(slug, slug);
     } else if (e.target.textContent === '✔ Kláraður fyrirlestur') {
       e.target.textContent = 'Klára fyrirlestur';
-      window.localStorage.removeItem(slug);
     }
+    //e.target.textContent.toggle('✔ Kláraður fyrirlestur');
+    save(slug);
+      
   }
 
   showYoutube(element, source) {

@@ -17,14 +17,11 @@ html { /* stylelint-disable-line */
   overflow-y: scroll; // alltaf hafa y skrollbar
 
   font-family: $font-main;
-  font-size: 16px;
+  font-size: $base;
 }
 
-img { /* stylelint-disable-line */
-  max-width: 100%;
-}
 
 // TODO import
 @import "config";
 @import "index";
-@import "fyrirlestrar";
+@import "lecture";
