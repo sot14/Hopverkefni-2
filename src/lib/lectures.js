@@ -21,8 +21,15 @@ export default class Lecture {
       });
   }
 
+  /**
+   * Nær í gögn fyrir fyrirlesturinn með slug sem er í núverandi urli
+   * og kallar í föll til að birta header, content og footer
+   * 
+   * @param {*Object} data lectures.json skráin
+   */
   loadLecture(data) {
-    const slug = window.location.search.substring(6);
+    const params = (new URL(document.location)).searchParams;
+    const slug = params.get('slug');
     const lData = data;
     let correctLecture;
     for (let i = 0; i < lData.lectures.length; i += 1) {
@@ -43,11 +50,18 @@ export default class Lecture {
     this.displayFooter(slug);
   }
 
-  displayHeader(title, image, category) { // ath. þarf kannski að búa til sér header hér
+
+  /**
+   * Býr til og birtir header núverandi fyrirlesturs 
+   * @param {*String} title titill núverandi fyrirlesturs
+   * @param {*String} image slóð á núverandi mynd í header, ef hún er til
+   * @param {*String} category html, css eða javascript
+   */
+  displayHeader(title, image, category) { 
     const header = document.querySelector('header');
     const content = document.querySelector('.header__content');
-    if (image != null) {
-      header.style.backgroundImage = image;
+    if (image != null) { // athugar hvort image í header sé til
+      header.style.backgroundImage = `url(${image})`;
     } else header.style.backgroundColor = 'grey';
     
     const h3 = el('h3', category);
@@ -57,30 +71,41 @@ export default class Lecture {
     content.appendChild(h);
   }
 
-
+  /**
+   * Býr til takka í footer og vistar fyrirlestur í local storage ef hann er kláraður 
+   * @param {String} slug núverandi fyrirlesturs
+   */
   displayFooter(slug) {
     debugger;
     const saved = window.localStorage.getItem(slug);
 
     const klaraButton = document.createElement('button');
-    klaraButton.addEventListener('click', this.isFinished.bind(this, slug));
+    klaraButton.classList.add('klara');
+    
     if (saved) {
       klaraButton.textContent = '✔ Kláraður fyrirlestur';
       klaraButton.style.color = '#2d2';
     } else klaraButton.textContent = 'Klára fyrirlestur';
-     
-    const backButton = document.createElement('button'); // TO DO fara aftur á forsíðu
+
+    klaraButton.addEventListener('click', this.isFinished.bind(event, slug));
+    const backButton = document.createElement('button');
     backButton.textContent = 'Til baka';
-    const footer = el('footer', klaraButton, backButton);
-    this.container.appendChild(footer);
+    const footer = document.querySelector('.lecture-footer');
+    footer.appendChild(klaraButton);
+    footer.appendChild(backButton);
   }
 
+  /**
+   * 
+   * @param {KeyEvent} e atburður
+   * @param {String} slug núverandi fyrirlesturs
+   */
   isFinished(e, slug) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ á fyrirlestur í list
     debugger;
     if (e.target.textContent === 'Klára fyrirlestur') {
       e.target.textContent = '✔ Kláraður fyrirlestur';
       e.target.style.color = '#2d2';
-      window.localStorage.setItem(slug, slug);
+      window.localStorage.setItem(slug, JSON.stringify(slug));
     } else if (e.target.textContent === '✔ Kláraður fyrirlestur') {
       e.target.textContent = 'Klára fyrirlestur';
       window.localStorage.removeItem(slug);
@@ -98,9 +123,12 @@ export default class Lecture {
   }
 
   showText(element, data) {
-    const p = document.createElement('p');
-    p.appendChild(document.createTextNode(data)); // þarf að gera fleiri p fyrir hvert new line?
-    element.appendChild(p);
+    const splitData = data.split('\n');
+    for (let i = 0; i < splitData.length; i += 1) {
+      const p = document.createElement('p');
+      p.appendChild(document.createTextNode(splitData[i]));
+      element.appendChild(p);
+    }
   }
 
   showQuote(element, data, attribute) {
@@ -133,6 +161,11 @@ export default class Lecture {
     // þarf mögulega að replacea & = &amp og < = &lt
     const lecCode = el('code', data);
     element.appendChild(lecCode);
+    const splitCode = data.split('\n');
+    for (let i = 0; i < splitCode.length; i += 1) {
+      const code = el('code', splitCode[i]);
+      element.appendChild(code);
+    }
   }
 
 

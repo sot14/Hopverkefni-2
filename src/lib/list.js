@@ -11,7 +11,7 @@ export default class List { // muna tak ef ekki ID
   constructor() {
     this.container = document.querySelector('.list');
 
-    this.htmlButton = document.querySelectorAll('.filter--active');
+    this.htmlButton = document.querySelector('.valm__html');
     this.cssButton = document.querySelector('.valm__css');
     this.jsButton = document.querySelector('.valm__js');
     this.setupFilters();
@@ -60,7 +60,7 @@ export default class List { // muna tak ef ekki ID
     const saved = getSavedLecture(item);
     if (saved) {
       const check = el('div', '✓');
-      check.classList.add('listItem__check');
+      check.classList.add('listItem--check');
       description.appendChild(check);
     }
 
