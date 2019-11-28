@@ -3,7 +3,8 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 
-import { empty, el } from './helpers';
+import { el, empty } from './helpers';
+import getSavedLecture from './storage';
 import Lecture from './lectures';
 
 export default class List { // muna tak ef ekki ID
@@ -55,6 +56,13 @@ export default class List { // muna tak ef ekki ID
 
     const content = el('div', description, divImage);
     content.classList.add('list__content');
+
+    const saved = getSavedLecture(item);
+    if (saved) {
+      const check = el('div', '✓');
+      check.classList.add('listItem__check');
+      description.appendChild(check);
+    }
 
 
     if (item.thumbnail) {
