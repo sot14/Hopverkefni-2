@@ -1,9 +1,12 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable linebreak-style */
+/* eslint-disable max-len */
 
 import { empty, el } from './helpers';
 import Lecture from './lectures';
 
-export default class List { //muna tak ef ekki ID
+export default class List { // muna tak ef ekki ID
   constructor() {
     this.container = document.querySelector('.list');
 
@@ -13,12 +16,12 @@ export default class List { //muna tak ef ekki ID
     this.setupFilters();
   }
 
-  setupFilters(){
-    const filters=document.getElementsByClassName('valm');
-    for (let filter of filters){
-      filter.addEventListener("click",(e) => {
+  setupFilters() {
+    const filters = document.getElementsByClassName('valm');
+    for (const filter of filters) {
+      filter.addEventListener('click', (e) => {
         e.target.classList.toggle('val-active');
-      })
+      });
     }
   }
 
@@ -29,13 +32,11 @@ export default class List { //muna tak ef ekki ID
 
   displayLectureList(data) {
     empty(this.container);
-    console.log(data);
     for (let i = 0; i < data.length; i += 1) {
       const element = el('div', this.displayLecListItem(data[i]));
       element.classList.add('list__page');
       this.container.appendChild(element);
       element.addEventListener('click', this.clickLecture);
-      
     }
   }
 
@@ -46,15 +47,15 @@ export default class List { //muna tak ef ekki ID
     const category = el('span', item.category);
     category.classList.add('list__category');
 
-    const description=el('div',title,category);
-    description.classList.add('list__description')
+    const description = el('div', title, category);
+    description.classList.add('list__description');
 
     const divImage = document.createElement('div');
     divImage.classList.add('list__image');
 
-    const content=el('div',description,divImage,);
+    const content = el('div', description, divImage);
     content.classList.add('list__content');
-    
+
 
     if (item.thumbnail) {
       const image = document.createElement('img');
@@ -66,31 +67,19 @@ export default class List { //muna tak ef ekki ID
     return lectureItem;
   }
 
-
-  filterLectureList(data, filter) {
-    let fLectures;
-    /*for (let i = 0; i < data.length; i += 1) {
-      if (data.lectures[i].category === filter) {
-        fLectures += data.lectures[i];
-      }
-    } */
-    this.displayLectureList(fLectures);
-  }
-
   filter() {
     const categories = document.getElementsByClassName('val-active');
-    const filtered = []; 
+    const filtered = [];
 
-    if (categories.length===0){
+    if (categories.length === 0) {
       return this.displayLectureList(this.data);
     }
-    for (let category of categories) {
-      filtered.push(...this.data.filter(lecture => lecture.category === category.dataset.category))
-      //....spread operator 
-      
+    for (const category of categories) {
+      filtered.push(...this.data.filter((lecture) => lecture.category === category.dataset.category));
+      // ....spread operator
     }
-    this.displayLectureList(filtered);
-  } 
+    return this.displayLectureList(filtered);
+  }
 
   load() {
     empty(this.container);
@@ -114,15 +103,3 @@ export default class List { //muna tak ef ekki ID
       });
   }
 }
-
-
-/*
- "lectures": [
-  {
-    "slug": "html-sagan",
-    "title": "Sagan",
-    "category": "html",
-    "image": "img/code.jpg",
-    "thumbnail": "img/thumb1.jpg",
-    "content":
-*/
