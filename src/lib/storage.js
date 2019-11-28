@@ -15,10 +15,8 @@ export function load() {
 }
 
 export function save(slug) {
-  const lecture = load();
-  lecture.push(slug);
-
-  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(lecture));
+  console.log('saving')
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(slug));
 }
 
 /**
