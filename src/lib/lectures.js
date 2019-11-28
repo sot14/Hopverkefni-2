@@ -9,7 +9,7 @@ export default class Lecture {
   }
 
   fetchLecture() { // TODO ná í rétt slug
-     fetch(this.url)
+    fetch(this.url)
       .then((res) => {
         if (!res.ok) {
           throw new Error('Gat ekki sótt fyrirlestra');
@@ -17,7 +17,7 @@ export default class Lecture {
         return res.json();
       })
       .then((data) => {
-      this.loadLecture(data);
+        this.loadLecture(data);
       });
   }
 
@@ -67,33 +67,31 @@ export default class Lecture {
     const klaraButton = document.createElement('button');
     klaraButton.addEventListener('click', this.isFinished.bind(this, slug));
     if (saved) {
-      klaraButton.innerText = '✔ Kláraður fyrirlestur';
+      klaraButton.textContent = '✔ Kláraður fyrirlestur';
       klaraButton.style.color = '#2d2';
-    } else klaraButton.innerText = 'Klára fyrirlestur';
+    } else klaraButton.textContent = 'Klára fyrirlestur';
      
     const backButton = document.createElement('button'); // TO DO fara aftur á forsíðu
-    backButton.innerText = 'Til baka';
+    backButton.textContent = 'Til baka';
     const footer = el('footer', klaraButton, backButton);
     this.container.appendChild(footer);
   }
 
   isFinished(e, slug) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ á fyrirlestur í list
     debugger;
-    const target = e;
-    if (target.innerText === 'Klára fyrirlestur') {
-      target.innerText = '✔ Kláraður fyrirlestur';
-      target.style.color = '#2d2';
+    if (e.target.textContent === 'Klára fyrirlestur') {
+      e.target.textContent = '✔ Kláraður fyrirlestur';
+      e.target.style.color = '#2d2';
       window.localStorage.setItem(slug, slug);
-    } else if (target.innerText === '✔ Kláraður fyrirlestur') {
-      target.innerText = 'Klára fyrirlestur';
+    } else if (e.target.textContent === '✔ Kláraður fyrirlestur') {
+      e.target.textContent = 'Klára fyrirlestur';
       window.localStorage.removeItem(slug);
     }
   }
 
   showYoutube(element, source) {
-    
     const div = document.createElement('div');
-    div.classList.add('lecture__video')
+    div.classList.add('lecture__video');
     const video = document.createElement('iframe');
     video.setAttribute('src', source);
 
@@ -151,9 +149,13 @@ export default class Lecture {
   }
 
 
+<<<<<<< HEAD
   displayLecture(lContent) { //nota möguelga switch eða else if
 
 
+=======
+  displayLecture(lContent) { // nota möguelga switch eða else if
+>>>>>>> 77c772316fd9cdf8bfb41b2834e65d8cefae1f90
     for (let i = 0; i < lContent.length; i += 1) {
       if (lContent[i].type === 'youtube') {
         this.showYoutube(this.container, lContent[i].data);

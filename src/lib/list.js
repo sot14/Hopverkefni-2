@@ -1,24 +1,29 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable linebreak-style */
+/* eslint-disable max-len */
 
-import { empty, el } from './helpers';
+import { el, empty } from './helpers';
+import getSavedLecture from './storage';
 import Lecture from './lectures';
 import { save,load } from './storage';
 
-export default class List { //muna tak ef ekki ID
+export default class List { // muna tak ef ekki ID
   constructor() {
     this.container = document.querySelector('.list');
-    this.htmlButton = document.querySelector('.valm__html');
+
+    this.htmlButton = document.querySelectorAll('.filter--active');
     this.cssButton = document.querySelector('.valm__css');
     this.jsButton = document.querySelector('.valm__js');
     this.setupFilters();
   }
 
-  setupFilters(){
-    const filters=document.getElementsByClassName('valm');
-    for (let filter of filters){
-      filter.addEventListener("click",(e) => {
+  setupFilters() {
+    const filters = document.getElementsByClassName('valm');
+    for (const filter of filters) {
+      filter.addEventListener('click', (e) => {
         e.target.classList.toggle('val-active');
-      })
+      });
     }
   }
 
@@ -34,7 +39,6 @@ export default class List { //muna tak ef ekki ID
       element.classList.add('list__page');
       this.container.appendChild(element);
       element.addEventListener('click', this.clickLecture);
-      
     }
   }
 
@@ -45,15 +49,22 @@ export default class List { //muna tak ef ekki ID
     const category = el('span', item.category);
     category.classList.add('list__category');
 
-    const description=el('div',title,category);
-    description.classList.add('list__description')
+    const description = el('div', title, category);
+    description.classList.add('list__description');
 
     const divImage = document.createElement('div');
     divImage.classList.add('list__image');
 
-    const content=el('div',description,divImage,);
+    const content = el('div', description, divImage);
     content.classList.add('list__content');
-    
+
+    const saved = getSavedLecture(item);
+    if (saved) {
+      const check = el('div', '✓');
+      check.classList.add('listItem__check');
+      description.appendChild(check);
+    }
+
 
     if (item.thumbnail) {
       const image = document.createElement('img');
@@ -65,19 +76,9 @@ export default class List { //muna tak ef ekki ID
     return lectureItem;
   }
 
-
-  filterLectureList(data, filter) {
-    let fLectures;
-    /*for (let i = 0; i < data.length; i += 1) {
-      if (data.lectures[i].category === filter) {
-        fLectures += data.lectures[i];
-      }
-    } */
-    this.displayLectureList(fLectures);
-  }
-
   filter() {
     const categories = document.getElementsByClassName('val-active');
+<<<<<<< HEAD
     const filtered = []; 
     const data= load();
 
@@ -107,6 +108,18 @@ export default class List { //muna tak ef ekki ID
     .catch((error) => {
       console.error(error);
     });
+=======
+    const filtered = [];
+
+    if (categories.length === 0) {
+      return this.displayLectureList(this.data);
+    }
+    for (const category of categories) {
+      filtered.push(...this.data.filter((lecture) => lecture.category === category.dataset.category));
+      // ....spread operator
+    }
+    return this.displayLectureList(filtered);
+>>>>>>> 77c772316fd9cdf8bfb41b2834e65d8cefae1f90
   }
 
   load() {
@@ -123,6 +136,7 @@ export default class List { //muna tak ef ekki ID
     }
   }
 }
+<<<<<<< HEAD
 
 
 /*
@@ -142,3 +156,5 @@ const data = {
 */
 
 
+=======
+>>>>>>> 77c772316fd9cdf8bfb41b2834e65d8cefae1f90
