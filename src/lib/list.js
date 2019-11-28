@@ -6,7 +6,6 @@
 import { el, empty } from './helpers';
 import { save, load } from './storage';
 import Lecture from './lectures';
-import { save,load } from './storage';
 
 export default class List { // muna tak ef ekki ID
   constructor() {
@@ -32,7 +31,7 @@ export default class List { // muna tak ef ekki ID
     lecture.fetchLecture();
   }
 
-  displayLectureList(data) {    
+  displayLectureList(data) {
     empty(this.container);
     for (let i = 0; i < data.length; i += 1) {
       const element = el('div', this.displayLecListItem(data[i]));
@@ -78,37 +77,6 @@ export default class List { // muna tak ef ekki ID
 
   filter() {
     const categories = document.getElementsByClassName('val-active');
-<<<<<<< HEAD
-    const filtered = []; 
-    const data= load();
-
-    if (categories.length===0){
-      return this.displayLectureList(data);
-    }
-    for (let category of categories) {
-      filtered.push(...data.filter(lecture => lecture.category === category.dataset.category))
-      //....spread operator 
-      
-    }
-    this.displayLectureList(filtered);
-  }
-
-  fetchLectures() {
-    fetch('./lectures.json')
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error('Villa við að sækja fyrirlestur');
-      }
-      return res.json();
-    })
-    .then((data) => {
-      save(data.lectures)
-      this.displayLectureList(data.lectures)
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-=======
     const filtered = [];
 
     if (categories.length === 0) {
@@ -119,7 +87,6 @@ export default class List { // muna tak ef ekki ID
       // ....spread operator
     }
     return this.displayLectureList(filtered);
->>>>>>> 77c772316fd9cdf8bfb41b2834e65d8cefae1f90
   }
 
   load() {
@@ -127,34 +94,20 @@ export default class List { // muna tak ef ekki ID
     this.htmlButton.addEventListener('click', this.filter.bind(this));
     this.cssButton.addEventListener('click', this.filter.bind(this));
     this.jsButton.addEventListener('click', this.filter.bind(this));
-    
-    const lectures = load();
-    if(lectures.length===0) {
-      this.fetchLectures();
-    } else {
-      this.displayLectureList(lectures);
-    }
+
+    fetch('./lectures.json')
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Villa við að sækja fyrirlestur');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        this.data = data.lectures;
+        this.displayLectureList(this.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 }
-<<<<<<< HEAD
-
-
-/*
-const data = {
-  "lectures": [
-    {
-      "slug": "html-sagan",
-      "title": "Sagan",
-      "category": "html",
-      "image": "img/code.jpg",
-      "thumbnail": "img/thumb1.jpg",
-      "content": 'asds',
-    },
-  ]
-}
-
-*/
-
-
-=======
->>>>>>> 77c772316fd9cdf8bfb41b2834e65d8cefae1f90
