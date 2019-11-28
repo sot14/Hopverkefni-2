@@ -4,7 +4,7 @@ import { el, empty } from './helpers';
 import { load, save } from './storage';
 export default class Lecture {
   constructor() {
-    this.container = document.querySelector('.lecture');
+    this.container = document.querySelector('.lecture__page');
     this.url = './lectures.json';
   }
 
@@ -49,7 +49,7 @@ export default class Lecture {
     const header = document.querySelector('header');
     const content = document.querySelector('.header__content');
     if (image != null) {
-      header.style.backgroundImage = image;
+      header.style.backgroundImage = `url(${image})`;
     } else header.style.backgroundColor = 'grey';
     
     const h3 = el('h3', category);
@@ -57,6 +57,8 @@ export default class Lecture {
     
     content.appendChild(h3);
     content.appendChild(h);
+
+    
   }
 
 
@@ -106,11 +108,22 @@ export default class Lecture {
     element.appendChild(div);
   }
 
-  showText(element, data) {
+  /*showText(element, data) {
     const p = document.createElement('p');
     p.appendChild(document.createTextNode(data)); // þarf að gera fleiri p fyrir hvert new line?
     element.appendChild(p);
+  }*/
+  showText(element, data) {
+    debugger;
+    const splitData = data.split('\n');
+    for (let i = 0; i < splitData.length; i += 1) {
+      const p = document.createElement('p');
+      p.appendChild(document.createTextNode(splitData[i]));
+      element.appendChild(p);
+    }
   }
+
+
 
   showQuote(element, data, attribute) {
     const lecQuote = el('blockquote', el('p', data), el('p', attribute));
@@ -145,7 +158,13 @@ export default class Lecture {
   }
 
 
+<<<<<<< HEAD
+  displayLecture(lContent) { //nota möguelga switch eða else if
+
+
+=======
   displayLecture(lContent) { // nota möguelga switch eða else if
+>>>>>>> 77c772316fd9cdf8bfb41b2834e65d8cefae1f90
     for (let i = 0; i < lContent.length; i += 1) {
       if (lContent[i].type === 'youtube') {
         this.showYoutube(this.container, lContent[i].data);
