@@ -3,8 +3,16 @@
 
 const LOCALSTORAGE_KEY = 'saved-lectures';
 const LECTURES_KEY = 'lectures'
+
 export function load() {
   const lecturesJson = localStorage.getItem(LOCALSTORAGE_KEY);
+  const lectures = JSON.parse(lecturesJson) || [];
+
+  return lectures;
+}
+
+export function loadLectures() {
+  const lecturesJson = localStorage.getItem(LECTURES_KEY);
   const lectures = JSON.parse(lecturesJson) || [];
 
   return lectures;

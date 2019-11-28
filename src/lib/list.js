@@ -3,14 +3,13 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 
-import { saveLectures, load } from './storage';
+import { saveLectures, loadLectures } from './storage';
 import { el, empty } from './helpers';
 import Lecture from './lectures';
 
 export default class List { // muna tak ef ekki ID
   constructor() {
     this.container = document.querySelector('.list');
-
     this.htmlButton = document.querySelector('.valm__html');
     this.cssButton = document.querySelector('.valm__css');
     this.jsButton = document.querySelector('.valm__js');
@@ -78,12 +77,13 @@ export default class List { // muna tak ef ekki ID
   filter() {
     const categories = document.getElementsByClassName('val-active');
     const filtered = [];
-
+    const lectures = loadLectures();
+    console.log(lectures)
     if (categories.length === 0) {
-      return this.displayLectureList(this.data);
+      return this.displayLectureList(lectures);
     }
     for (const category of categories) {
-      filtered.push(...this.data.filter((lecture) => lecture.category === category.dataset.category));
+      filtered.push(...lectures.filter((lecture) => lecture.category === category.dataset.category));
       // ....spread operator
     }
     return this.displayLectureList(filtered);
@@ -112,7 +112,7 @@ export default class List { // muna tak ef ekki ID
     this.cssButton.addEventListener('click', this.filter.bind(this));
     this.jsButton.addEventListener('click', this.filter.bind(this));
 
-    const lectures = load();
+    const lectures = loadLectures();
     if(lectures.length === 0) {
       this.fetchLectures();
     } else {
