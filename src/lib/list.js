@@ -19,6 +19,8 @@ export default class List {
   }
 
   getHtml() {
+    debugger;
+    console.log(this);
     const fHtml = this.data.filter((lecture) => lecture.category === 'html');
     this.htmlButton.classList.toggle('valm__html--filter');
     if (this.htmlButton.className === 'valm__html') {
