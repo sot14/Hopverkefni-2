@@ -3,8 +3,8 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable max-len */
 
+import { saveLectures, load } from './storage';
 import { el, empty } from './helpers';
-import { save, load } from './storage';
 import Lecture from './lectures';
 
 export default class List { // muna tak ef ekki ID
@@ -89,25 +89,34 @@ export default class List { // muna tak ef ekki ID
     return this.displayLectureList(filtered);
   }
 
+  fetchLectures() {
+    fetch('./lectures.json')
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Villa við að sækja fyrirlestur');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      saveLectures(data.lectures)
+      this.displayLectureList(data.lectures);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  }
+
   load() {
     empty(this.container);
     this.htmlButton.addEventListener('click', this.filter.bind(this));
     this.cssButton.addEventListener('click', this.filter.bind(this));
     this.jsButton.addEventListener('click', this.filter.bind(this));
 
-    fetch('./lectures.json')
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Villa við að sækja fyrirlestur');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        this.data = data.lectures;
-        this.displayLectureList(this.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const lectures = load();
+    if(lectures.length === 0) {
+      this.fetchLectures();
+    } else {
+      this.displayLectureList(lectures);
+    }
   }
 }
