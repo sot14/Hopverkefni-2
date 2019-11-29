@@ -4,7 +4,7 @@
 const LOCALSTORAGE_KEY = 'saved-lectures';
 const LECTURES_KEY = 'lectures'
 
-export function load() {
+export function loadLec() {
   const lecturesJson = localStorage.getItem(LOCALSTORAGE_KEY);
   const lectures = JSON.parse(lecturesJson) || [];
 
@@ -24,6 +24,7 @@ export function saveLectures(lectures) {
 }
 
 export function save(slug) {
+  debugger;
 // includes slug, splice, push, 
   const lectures = load();
   const store = lectures.indexOf(slug);

@@ -56,12 +56,12 @@ export default class List { // muna tak ef ekki ID
     const content = el('div', description, divImage);
     content.classList.add('list__content');
 
-    const saved = load();
+    /*const saved = load();
     if (saved.indexOf(item.slug) >= 0) {
       const check = el('div', '✓');
       check.classList.add('listItem--check');
       description.appendChild(check);
-    }
+    }*/
 
 
     if (item.thumbnail) {

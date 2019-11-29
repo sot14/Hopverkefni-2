@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 import { el } from './helpers';
-import { load, save } from './storage';
+import { loadLec, save } from './storage';
 
 export default class Lecture {
   constructor() {
@@ -75,9 +75,10 @@ export default class Lecture {
    * Býr til takka í footer og vistar fyrirlestur í local storage ef hann er kláraður 
    * @param {String} slug núverandi fyrirlesturs
    */
+  
   displayFooter(slug) {
     debugger;
-    const saved = load();
+    const saved = loadLec();
     const klaraButton = document.createElement('button');
     if (saved.indexOf(slug) >= 0 ) {
       klaraButton.textContent = '✔ Kláraður fyrirlestur';
@@ -102,7 +103,7 @@ export default class Lecture {
    */
   isFinished(e, slug) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ í list
     debugger;
-    const saved = load();
+    const saved = loadLec();
     if (saved.indexOf(slug) >= 0) {
       e.target.textContent = '✔ Kláraður fyrirlestur';
       e.target.style.color = '#2d2'; 
