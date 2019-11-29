@@ -57,15 +57,13 @@ export default class List { // muna tak ef ekki ID
     content.classList.add('list__content');
 
     const saved = loadLec();
-    for(let i = 0; i < saved.length; i += 1) {
+    for (let i = 0; i < saved.length; i += 1) {
       if (saved[i] === item.slug) { // saved = {"html-sagan", "blabla"}
-      const check = el('div', '✓');
-      check.classList.add('listItem__check');
-      description.appendChild(check);
+        const check = el('div', '✓');
+        check.classList.add('listItem__check');
+        description.appendChild(check);
       }
     }
-    
-
 
     if (item.thumbnail) {
       const image = document.createElement('img');
@@ -101,8 +99,8 @@ export default class List { // muna tak ef ekki ID
         return res.json();
       })
       .then((data) => {
-       this.data = data.lectures;
-       this.displayLectureList(this.data);
+        this.data = data.lectures;
+        this.displayLectureList(this.data);
       })
       .catch((error) => {
         console.error(error);
