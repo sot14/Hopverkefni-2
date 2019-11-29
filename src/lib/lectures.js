@@ -1,6 +1,6 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable linebreak-style */
-import { el, empty } from './helpers';
+import { el } from './helpers';
 import { load, save } from './storage';
 export default class Lecture {
   constructor() {
@@ -21,7 +21,7 @@ export default class Lecture {
       });
   }
 
-  loadLecture(data) {
+  loadLecture(data) { ////////ö------
     const params = (new URL(document.location)).searchParams;
     const slug = params.get('slug');
     this.slug = slug;
@@ -47,9 +47,9 @@ export default class Lecture {
 
   displayHeader(title, image, category) { // ath. þarf kannski að búa til sér header hér
     const header = document.querySelector('header');
-    const content = document.querySelector('.header__content');
+    const content = document.querySelector('header');
     if (image != null) {
-      header.style.backgroundImage = image;
+      header.style.backgroundImage =`url(${image})`;
     } else header.style.backgroundColor = 'grey';
     
     const h3 = el('h3', category);
@@ -62,20 +62,17 @@ export default class Lecture {
 
   displayFooter(slug) {
     debugger;
-    const saved = window.localStorage.getItem(slug);
+    const saved = load();
     const klaraButton = document.createElement('button');
-    klaraButton.addEventListener('click', this.isFinished.bind(this, slug));
-    if (saved) {
+    if (saved.indexOf(slug) >= 0 ) {
       klaraButton.textContent = '✔ Kláraður fyrirlestur';
-      klaraButton.classList.add('button__klarad--active');
-      klaraButton.style.color = '#2d2'; 
+      klaraButton.style.color = '#2d2';
     } else {
-      klaraButton.textContent = 'Klára fyrirlestur';
-      klaraButton.classList.add('button__klarad');
-  }
-
+        klaraButton.textContent = 'Klára fyrirlestur';
+      }
+    klaraButton.addEventListener('click', this.isFinished.bind(this, slug));
     const backButton = el('a', 'Til baka');
-    backButton.setAttribute('href', '/');
+    backButton.setAttribute('href', '/');  //muna að laga, fá rétta slóð 
     backButton.classList.add('button__back');
     const content = document.querySelector('.lecture-footer');
     content.appendChild(klaraButton);
@@ -84,15 +81,18 @@ export default class Lecture {
 
   isFinished(slug, e) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ á fyrirlestur í list
     debugger;
-
-    if (e.target.textContent === 'Klára fyrirlestur') {
+    console.log(slug);
+    const saved=load();
+    if (saved.indexOf(slug) >= 0 ) {
       e.target.textContent = '✔ Kláraður fyrirlestur';
       e.target.style.color = '#2d2';
     } else if (e.target.textContent === '✔ Kláraður fyrirlestur') {
       e.target.textContent = 'Klára fyrirlestur';
+      e.target.style.color = '#000';
     }
     //e.target.textContent.toggle('✔ Kláraður fyrirlestur');
     save(slug);
+    e.target.classList.toggle('button__klarad--active');
       
   }
 
