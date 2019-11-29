@@ -31,19 +31,16 @@
     
     }
 }
-.lec{
+main{
 display: grid;
 max-width: $max-width;
 grid-template-columns: 1fr 1fr 1fr;
 column-gap:$gutter;
-
 margin: auto;
 margin-bottom: 3em;
 
     .lecture {
-       display: flex;
-       flex-direction: column;
-       align-items: center; 
+
         .lecture__video {
             position: relative;
             max-width: 100%;
@@ -73,7 +70,6 @@ margin-bottom: 3em;
         blockquote {
             background-color: $lightgrey;
             
-            padding: $gutter;
         }
             
         }
@@ -85,7 +81,7 @@ margin-bottom: 3em;
     justify-content: center;
     height: 30vh;
 
-    .button__klarad {
+    .button__klarad, .button__klarad--active {
         background-color: transparent;
         border-color: transparent;
         margin-bottom: $gutter;
@@ -97,11 +93,3 @@ margin-bottom: 3em;
         text-decoration-line: unset;
     }
 }
-
-
-	/*.lecture {
-    max-width: $max-width;
-    margin: 0 auto;
-    justify-content: center;
-    align-content: center;
-}*/

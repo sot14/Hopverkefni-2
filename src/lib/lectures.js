@@ -77,7 +77,6 @@ export default class Lecture {
    */
 
   displayFooter(slug) {
-    debugger;
     const saved = loadLec();
     const klaraButton = document.createElement('button');
     klaraButton.classList.add('button__klarad');
@@ -103,8 +102,7 @@ export default class Lecture {
    * @param {KeyEvent} e atburður
    * @param {String} slug núverandi fyrirlesturs
    */
-  isFinished(slug, e) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ í list
-    debugger;
+  isFinished(slug, e) {
     const saved = loadLec();
     if (saved.indexOf(slug) >= 0) {
       e.target.textContent = 'Klára fyrirlestur';
@@ -112,7 +110,6 @@ export default class Lecture {
     } else {
       e.target.textContent = '✔ Fyrirlestur kláraður';
       e.target.style.color = '#2d2';
-      
     }
     save(slug);
     e.target.classList.toggle('button__klarad--active');
