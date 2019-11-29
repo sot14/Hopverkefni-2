@@ -80,7 +80,7 @@ export default class Lecture {
     const saved = load();
     const klaraButton = document.createElement('button');
     if (saved.indexOf(slug) >= 0) {
-      klaraButton.textContent = '✔ Kláraður fyrirlestur';
+      klaraButton.textContent = '✔ Fyrirlestur kláraður';
       klaraButton.style.color = '#2d2';
     } else {
       klaraButton.textContent = 'Klára fyrirlestur';
@@ -101,11 +101,11 @@ export default class Lecture {
    * @param {KeyEvent} e atburður
    * @param {String} slug núverandi fyrirlesturs
    */
-  isFinished(e, slug) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ í list
+  isFinished(slug, e) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ í list
     debugger;
     const saved = load();
     if (saved.indexOf(slug) >= 0) {
-      e.target.textContent = '✔ Kláraður fyrirlestur';
+      e.target.textContent = '✔ Fyrirlestur kláraður';
       e.target.style.color = '#2d2';
     } else {
       e.target.textContent = 'Klára fyrirlestur';
@@ -144,6 +144,7 @@ export default class Lecture {
     img.src = data;
     const cite = el('cite', caption);
     const div = el('div', img, cite);
+    div.classList.add('lecture__image');
     element.appendChild(div);
   }
 
