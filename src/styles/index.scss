@@ -66,6 +66,12 @@
                    .list__category{
                        text-transform: uppercase;
                    }
+
+                   .listItem__check{
+                       color:$green;
+                       display: flex;
+                       flex-flow: row-reverse;
+                   }
                }
                 .list__image{
                     height:100%;
