@@ -24,7 +24,7 @@ export default class Lecture {
   /**
    * Nær í gögn fyrir fyrirlesturinn með slug sem er í núverandi urli
    * og kallar í föll til að birta header, content og footer
-   * 
+   *
    * @param {*Object} data lectures.json skráin
    */
   loadLecture(data) {
@@ -42,7 +42,7 @@ export default class Lecture {
     if (correctLecture.image) {
       lImage = correctLecture.image;
     } else lImage = null;
-    
+
     const lContent = correctLecture.content;
 
     this.displayHeader(lTitle, lImage, lCategory);
@@ -52,42 +52,42 @@ export default class Lecture {
 
 
   /**
-   * Býr til og birtir header núverandi fyrirlesturs 
+   * Býr til og birtir header núverandi fyrirlesturs
    * @param {*String} title titill núverandi fyrirlesturs
    * @param {*String} image slóð á núverandi mynd í header, ef hún er til
    * @param {*String} category html, css eða javascript
    */
-  displayHeader(title, image, category) { 
+  displayHeader(title, image, category) {
     const header = document.querySelector('.lecture-header');
     const content = document.querySelector('.header__content');
     if (image != null) { // athugar hvort image í header sé til
       header.style.backgroundImage = `url(${image})`;
     } else header.style.backgroundColor = 'grey';
-    
+
     const h3 = el('h3', category);
     const h = el('h1', title);
-    
+
     content.appendChild(h3);
     content.appendChild(h);
   }
 
   /**
-   * Býr til takka í footer og vistar fyrirlestur í local storage ef hann er kláraður 
+   * Býr til takka í footer og vistar fyrirlestur í local storage ef hann er kláraður
    * @param {String} slug núverandi fyrirlesturs
    */
   displayFooter(slug) {
     debugger;
     const saved = load();
     const klaraButton = document.createElement('button');
-    if (saved.indexOf(slug) >= 0 ) {
+    if (saved.indexOf(slug) >= 0) {
       klaraButton.textContent = '✔ Kláraður fyrirlestur';
       klaraButton.style.color = '#2d2';
     } else {
-        klaraButton.textContent = 'Klára fyrirlestur';
-      }
+      klaraButton.textContent = 'Klára fyrirlestur';
+    }
     klaraButton.addEventListener('click', this.isFinished.bind(this, slug));
     const backButton = el('a', 'Til baka');
-    backButton.setAttribute('href', '/');  //muna að laga, fá rétta slóð 
+    backButton.setAttribute('href', '/'); // muna að laga, fá rétta slóð
     backButton.classList.add('button__back');
     const content = document.querySelector('.lecture-footer');
     content.appendChild(klaraButton);
@@ -105,14 +105,13 @@ export default class Lecture {
     const saved = load();
     if (saved.indexOf(slug) >= 0) {
       e.target.textContent = '✔ Kláraður fyrirlestur';
-      e.target.style.color = '#2d2'; 
+      e.target.style.color = '#2d2';
     } else {
       e.target.textContent = 'Klára fyrirlestur';
       e.target.style.color = '#000';
     }
     save(slug);
     e.target.classList.toggle('button__klarad--active');
-      
   }
 
   showYoutube(element, source) {
@@ -174,7 +173,7 @@ export default class Lecture {
    * Kallar í viðeigandi föll til að birta efnið í fyrirlestrinum rétt
    * @param {Array} lContent fylki sem geymir innihald núverandi fyrirlesturs
    */
-  displayLecture(lContent) { 
+  displayLecture(lContent) {
     for (let i = 0; i < lContent.length; i += 1) {
       if (lContent[i].type === 'youtube') {
         this.showYoutube(this.container, lContent[i].data);

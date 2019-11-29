@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable linebreak-style */
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable max-len */
 
 import { saveLectures, loadLectures } from './storage';
@@ -78,7 +78,6 @@ export default class List { // muna tak ef ekki ID
     const categories = document.getElementsByClassName('val-active');
     const filtered = [];
     const lectures = loadLectures();
-    console.log(lectures);
     if (categories.length === 0) {
       return this.displayLectureList(lectures);
     }
