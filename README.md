@@ -35,12 +35,14 @@ Mappan inniheldur allar nauðsynlegar skrár, m.a.
 - HTML skrár: Tvær talsins, _index_ og _fyrirlestur_, index.html fyrir forsíðuna og fyrirlestur.html fyrir fyrirlestrarsíðuna.
 
 
-# Hópverkefni 2
 **Upplýsingar um þá sem unnu verkefnið:**
 
 - Jenný Hildur Ómarsdóttir - jho6@hi.is
 - Sara Ósk Þorsteinsdóttir - sot14@hi.is
 - Tómas Jónsson - toj6@hi.is
+
+
+# Gefin lýsing
 
 Verkefnið felst í því að smíða prótótýpu af fyrirlestravef fyrir vefforritun. Gefin eru gögn sem unnin eru uppúr námsefni vetrarins.
 

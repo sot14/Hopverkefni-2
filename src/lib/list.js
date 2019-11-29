@@ -3,6 +3,7 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable max-len */
 
+import { loadLec } from './storage';
 import { el, empty } from './helpers';
 import Lecture from './lectures';
 

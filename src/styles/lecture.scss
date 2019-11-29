@@ -39,7 +39,8 @@
         .lecture__video {
             position: relative;
             max-width: 100%;
-            height: 60vh;  // laga í media? birtist ekki alveg rétt
+            height: 20%;  // laga í media? birtist ekki alveg rétt
+            margin: $gutter 0;
             padding-bottom: 56.25%;
             overflow: hidden;
         
@@ -58,12 +59,18 @@
         }
         p {
             margin-bottom: $gutter;
+            font-family: $font-main;
+            font-size: $base;
+        }
+        .lecture__code {
+            margin: $gutter 0;
         }
         code {
-            margin-bottom: $gutter;
+            display: block;
         }
         blockquote {
             background-color: $lightgrey;
+            font-family: $font-main;
         }
         }
 }
@@ -77,11 +84,13 @@
         background-color: transparent;
         border-color: transparent;
         margin-bottom: $gutter;
+        font-family: $font-main;
     }
 
     .button__back {
         text-align: center;
         color: $black;
         text-decoration-line: unset;
+        font-family: $font-main;
     }
 }

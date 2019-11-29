@@ -102,7 +102,7 @@ export default class Lecture {
    * @param {KeyEvent} e atburður
    * @param {String} slug núverandi fyrirlesturs
    */
-  isFinished(slug, e) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ í list
+  isFinished(slug, e) {
     const saved = loadLec();
     if (saved.indexOf(slug) >= 0) {
       e.target.textContent = 'Klára fyrirlestur';
@@ -167,10 +167,11 @@ export default class Lecture {
     div.classList.add('lecture__code');
     for (let i = 0; i < splitCode.length; i += 1) {
       const code = el('code', splitCode[i]);
-      div.appendChild(code)
+      div.appendChild(code);
     }
     element.appendChild(div);
   }
+
 
   /**
    * Les í gegnum fyrirlestur og athugar hvers konar efni á að birta í fyrirlestri
