@@ -1,7 +1,46 @@
 # Hópverkefni 2
 
-## Keyrsla verkefnis
-Verkefnið er keyrt
+**Keyrsla verkefnis:**
+
+Til þess að opna verkefnið þarf að fylgja eftirfarandi leiðbeiningum:
+
+1. Fyrst þarf að hala niður git og node, en tenglar til að hala því niður eru látnar fylgja fyrir neðan. Passa þarf upp á að fylgja réttum leiðbeiningum fyrir stýrikerfið í þeirri tölvu sem notast er við.
+
+2. Næst þarf á að klóna repositoryið, sem tengill hér að neðan vísar á, af github inn á local hjá notanda. Það er gert með því að fara upp í hægra hornið á upphafssíðunni á githup repository verkefnisins. Þar er grænn takki sem á stendur "clone or download". Þá kemur upp gluggi sem m.a. inniheldur link. Það þarf að copy-a þann link, en hann mun gera notandanum keift að opna þetta verkefni í sinni tölvu.
+
+3. Síðan er farið í command line glugga og stimpla inn eftirfarandi skipanir
+
+    - cd /
+    - cd -*slóð á þann stað í tölvunni sem verkefnið á að vera í*
+    - git clone -*klónaður tengill á repositoryið*-
+    - npm install (setur upp node pakkastjórann í tölvunni)
+    - npm run dev (dev er skipun sem er búin að linka saman sass og browser-sync í pacagejson skránni)
+
+Núna ætti síðan að vera búin að opnast á vefnum.
+
+**Tenglar:**
+
+- git download: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+- node download: https://nodejs.org/en/download/current/
+- github repo: https://github.com/sot14/Hopverkefni-2
+
+**Uppsetning verkefnis:**
+
+Mappan inniheldur allar nauðsynlegar skrár, m.a.
+- img með öllum myndum verkefnisins
+- src: inniheldur allar nauðsynlegar javascript og scss skrár.
+    - lib: Inniheldur JS skrárnar _helpers_, _lectures_, _list_ og _storage_. helpers.js geymir hjálparföll fyrir list.js og lectures.js. list.js birtir alla fyrirlestrana á forsíðunni og sér um að sía fyrirlestrana. lectures.js birtir efni fyrirlestrana, þar geturðu merkt við kláraða fyrirlestra, sem vistast í storage.js
+    - styles: inniheldur allar scss skrár fyrir útlit vefsíðunnar, m.a. index.scss fyrir forsíðuna og lecture.scss fyrir fyrirlestra.
+    - index.js: kallar á annað hvort forsíðuna eða fyrirlestrarsíðuna.
+- HTML skrár: Tvær talsins, _index_ og _fyrirlestur_, index.html fyrir forsíðuna og fyrirlestur.html fyrir fyrirlestrarsíðuna.
+
+
+# Hópverkefni 2
+**Upplýsingar um þá sem unnu verkefnið:**
+
+- Jenný Hildur Ómarsdóttir - jho6@hi.is
+- Sara Ósk Þorsteinsdóttir - sot14@hi.is
+- Tómas Jónsson - toj6@hi.is
 
 Verkefnið felst í því að smíða prótótýpu af fyrirlestravef fyrir vefforritun. Gefin eru gögn sem unnin eru uppúr námsefni vetrarins.
 
