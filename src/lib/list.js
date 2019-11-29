@@ -56,12 +56,12 @@ export default class List { // muna tak ef ekki ID
     const content = el('div', description, divImage);
     content.classList.add('list__content');
 
-    const saved = load();
-    if (saved.indexOf(item.slug) >= 0) {
+    /* const saved = save(item);
+    if (saved) {
       const check = el('div', '✓');
-      check.classList.add('listItem--check');
+      check.classList.add('listItem__check');
       description.appendChild(check);
-    }
+    } */
 
 
     if (item.thumbnail) {
@@ -78,6 +78,8 @@ export default class List { // muna tak ef ekki ID
     const categories = document.getElementsByClassName('val-active');
     const filtered = [];
     const lectures = loadLectures();
+
+    console.log(lectures);
     if (categories.length === 0) {
       return this.displayLectureList(lectures);
     }

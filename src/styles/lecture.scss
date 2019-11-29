@@ -1,37 +1,37 @@
-.lecture-header{
-    display: flex;
-    height: 50vh;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    justify-content: center;
-
-    .header__content{
-        background-size: cover;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        background-color: rgba(31, 18, 18, 0.4);
-        width: 100%;
+.lecture-header {
+	display: flex;
+	height: 50vh;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	justify-content: center;
+	.header__content {
+		background-size: cover;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		background-color: rgba(31, 18, 18, 0.4);
+		width: 100%;
         height: 100%;
-        //25% auto 25% grid
-
-        h1{
-            display: block;
-            text-transform: uppercase;
-            font-family: $font-header;
-            position: relative;
+        
+		h1 {
+			display: block;
+			//text-transform: uppercase;
+			font-family: $font-header;
+			position: relative;
+            z-index: 1;
+		}
+		h3 {
+			display: block;
+			text-align: center;
+			font-family: $font-header;
             z-index: 1;
         }
-        h3{
-            display: block;
-            text-align: center;
-            font-family: $font-header;
-            z-index: 1;
-        }
+    
     }
 }
+<<<<<<< HEAD
 
 
 .lecture {
@@ -44,20 +44,52 @@
 
   /*
   
+=======
+    main{
+    display: grid;
+    max-width: $max-width;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap:$gutter;
+    margin: auto;
+    margin-bottom: 3em;
+>>>>>>> 340ba0a3eb86e88afa8b78686530a697f2dc7650
 
-    .lecture__page{
-        display: grid;
-        max-width: $max-width;
-        grid-template-columns: 20% auto 20%;
-        column-gap:$gutter;
-        margin: auto;
-        margin-bottom: 3em;
-  
+        .lecture{
 
-
-        .lecture__video{
-            grid-column-start: 2;
-
+            .lecture__video{
+                position: relative;
+                max-width: 100%;
+                padding-bottom: 56.25%;
+                overflow: hidden;
+            
+            iframe{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
         }
+
+        p{
+            margin-bottom: $gutter;
+        }
+<<<<<<< HEAD
     }*/
 }
+=======
+        code{
+            margin-bottom: $gutter;
+        }
+            
+        }
+    }
+
+
+	/*.lecture {
+    max-width: $max-width;
+    margin: 0 auto;
+    justify-content: center;
+    align-content: center;
+}*/
+>>>>>>> 340ba0a3eb86e88afa8b78686530a697f2dc7650
