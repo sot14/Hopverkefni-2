@@ -47,9 +47,9 @@ export default class Lecture {
 
   displayHeader(title, image, category) { // ath. þarf kannski að búa til sér header hér
     const header = document.querySelector('header');
-    const content = document.querySelector('header');
+    const content = document.querySelector('.header__content');
     if (image != null) {
-      header.style.backgroundImage =`url(${image})`;
+      header.style.backgroundImage = image;
     } else header.style.backgroundColor = 'grey';
     
     const h3 = el('h3', category);
