@@ -57,8 +57,9 @@ export default class List { // muna tak ef ekki ID
     content.classList.add('list__content');
 
     const saved = loadLec();
+    debugger;
     for (let i = 0; i < saved.length; i += 1) {
-      if (saved[i] === item.slug) { // saved = {"html-sagan", "blabla"}
+      if (saved[i] === item.slug) {
         const check = el('div', '✓');
         check.classList.add('listItem__check');
         description.appendChild(check);
