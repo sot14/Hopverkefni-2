@@ -1,5 +1,4 @@
 /* eslint-disable linebreak-style */
-/* eslint-disable no-trailing-spaces */
 import { el } from './helpers';
 import { load, save } from './storage';
 
@@ -78,20 +77,21 @@ export default class Lecture {
    */
   displayFooter(slug) {
     debugger;
-   
-
+    const saved = load();
     const klaraButton = document.createElement('button');
-    klaraButton.classList.add('button__klarad');
-    if (klaraButton.textContent !== '✔ Kláraður fyrirlestur') {
-      klaraButton.textContent = 'Klára fyrirlestur';
-    }
-    klaraButton.addEventListener('click', this.isFinished.bind(this, slug)); // ATH hvað á að vera hér inni? virkar með bara slug en þá kemur það undefined
-    
-    const backButton = document.createElement('button');
-    backButton.textContent = 'Til baka';
-    const footer = document.querySelector('.lecture-footer');
-    footer.appendChild(klaraButton);
-    footer.appendChild(backButton);
+    if (saved.indexOf(slug) >= 0 ) {
+      klaraButton.textContent = '✔ Kláraður fyrirlestur';
+      klaraButton.style.color = '#2d2';
+    } else {
+        klaraButton.textContent = 'Klára fyrirlestur';
+      }
+    klaraButton.addEventListener('click', this.isFinished.bind(this, slug));
+    const backButton = el('a', 'Til baka');
+    backButton.setAttribute('href', '/');  //muna að laga, fá rétta slóð 
+    backButton.classList.add('button__back');
+    const content = document.querySelector('.lecture-footer');
+    content.appendChild(klaraButton);
+    content.appendChild(backButton);
   }
 
   /**
@@ -108,10 +108,11 @@ export default class Lecture {
       e.target.style.color = '#2d2'; 
     } else {
       e.target.textContent = 'Klára fyrirlestur';
-      e.target.style.color = 'black';
+      e.target.style.color = '#000';
     }
-    save(slug); // mögulega betra að kalla þetta toggleSaved eða eitthvað svoleiðis
-    e.target.classList.toggle('button__klarad--active')
+    save(slug);
+    e.target.classList.toggle('button__klarad--active');
+      
   }
 
   showYoutube(element, source) {
