@@ -14,15 +14,15 @@ export function save(slug) {
   debugger;
 // includes slug, splice, push, 
   const lectures = loadLec();
-  const store = lecture.indexOf(slug);
+  const store = lectures.indexOf(slug);
     
   if (store >= 0) {
-    lecture.splice(store, 1);
+    lectures.splice(store, 1);
   } else {
-    lecture.push(slug);
+    lectures.push(slug);
   }
 
-  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(lecture));
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(lectures));
 } 
 
 export function loadLectures() {

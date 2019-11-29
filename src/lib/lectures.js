@@ -80,6 +80,7 @@ export default class Lecture {
     debugger;
     const saved = loadLec();
     const klaraButton = document.createElement('button');
+    klaraButton.classList.add('button__klarad');
     if (saved.indexOf(slug) >= 0) {
       klaraButton.textContent = '✔ Fyrirlestur kláraður';
       klaraButton.style.color = '#2d2';
@@ -106,11 +107,12 @@ export default class Lecture {
     debugger;
     const saved = loadLec();
     if (saved.indexOf(slug) >= 0) {
-      e.target.textContent = '✔ Fyrirlestur kláraður';
-      e.target.style.color = '#2d2';
-    } else {
       e.target.textContent = 'Klára fyrirlestur';
       e.target.style.color = '#000';
+    } else {
+      e.target.textContent = '✔ Fyrirlestur kláraður';
+      e.target.style.color = '#2d2';
+      
     }
     save(slug);
     e.target.classList.toggle('button__klarad--active');
@@ -163,7 +165,6 @@ export default class Lecture {
   }
 
   showCode(element, data) {
-    debugger;
     // þarf mögulega að replacea & = &amp og < = &lt
     const splitCode = data.split('\n');
     for (let i = 0; i < splitCode.length; i += 1) {

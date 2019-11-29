@@ -3,7 +3,7 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable max-len */
 
-import { saveLectures, loadLectures } from './storage';
+import { saveLectures, loadLectures, loadLec } from './storage';
 import { el, empty } from './helpers';
 import Lecture from './lectures';
 
@@ -56,12 +56,15 @@ export default class List { // muna tak ef ekki ID
     const content = el('div', description, divImage);
     content.classList.add('list__content');
 
-    /* const saved = save(item);
-    if (saved) {
+    const saved = loadLec();
+    for(let i = 0; i < saved.length; i += 1) {
+      if (saved[i] === item.slug) { // saved = {"html-sagan", "blabla"}
       const check = el('div', '✓');
       check.classList.add('listItem__check');
       description.appendChild(check);
-    } */
+      }
+    }
+    
 
 
     if (item.thumbnail) {
