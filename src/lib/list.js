@@ -3,10 +3,6 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable max-len */
 
-<<<<<<< Updated upstream
-import { loadLec } from './storage';
-=======
->>>>>>> Stashed changes
 import { el, empty } from './helpers';
 import Lecture from './lectures';
 

@@ -17,7 +17,6 @@
         
 		h1 {
 			display: block;
-			//text-transform: uppercase;
 			font-family: $font-header;
 			position: relative;
             z-index: 1;
@@ -32,12 +31,8 @@
     }
 }
 .lec{
-display: grid;
-max-width: $max-width;
-grid-template-columns: 1fr 1fr 1fr;
-column-gap:$gutter;
-margin: auto;
-margin-bottom: 3em;
+    max-width: 800px;
+    margin: auto;
 
     .lecture {
 
@@ -69,12 +64,9 @@ margin-bottom: 3em;
         }
         blockquote {
             background-color: $lightgrey;
-            
         }
-            
         }
 }
-
 .lecture-footer {
     display: flex;
     flex-direction: column;

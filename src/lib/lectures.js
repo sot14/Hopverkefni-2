@@ -102,11 +102,7 @@ export default class Lecture {
    * @param {KeyEvent} e atburður
    * @param {String} slug núverandi fyrirlesturs
    */
-<<<<<<< Updated upstream
-  isFinished(slug, e) {
-=======
   isFinished(slug, e) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ í list
->>>>>>> Stashed changes
     const saved = loadLec();
     if (saved.indexOf(slug) >= 0) {
       e.target.textContent = 'Klára fyrirlestur';
@@ -119,7 +115,7 @@ export default class Lecture {
     e.target.classList.toggle('button__klarad--active');
   }
 
-  showYoutube(element, source) {
+  Youtube(element, source) {
     const div = document.createElement('div');
     div.classList.add('lecture__video');
     const video = document.createElement('iframe');
@@ -166,12 +162,14 @@ export default class Lecture {
   }
 
   showCode(element, data) {
-    // þarf mögulega að replacea & = &amp og < = &lt
     const splitCode = data.split('\n');
+    const div = document.createElement('div');
+    div.classList.add('lecture__code');
     for (let i = 0; i < splitCode.length; i += 1) {
       const code = el('code', splitCode[i]);
-      element.appendChild(code);
+      div.appendChild(code)
     }
+    element.appendChild(div);
   }
 
   /**
