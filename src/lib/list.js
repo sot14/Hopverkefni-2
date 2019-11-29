@@ -4,7 +4,7 @@
 /* eslint-disable max-len */
 
 import { el, empty } from './helpers';
-import getSavedLecture from './storage';
+import { save, load } from './storage';
 import Lecture from './lectures';
 
 export default class List { // muna tak ef ekki ID
@@ -57,8 +57,8 @@ export default class List { // muna tak ef ekki ID
     const content = el('div', description, divImage);
     content.classList.add('list__content');
 
-    const saved = getSavedLecture(item);
-    if (saved) {
+    const saved = load();
+    if (saved.indexOf(item.slug) >= 0) {
       const check = el('div', '✓');
       check.classList.add('listItem--check');
       description.appendChild(check);
@@ -78,6 +78,18 @@ export default class List { // muna tak ef ekki ID
   filter() {
     const categories = document.getElementsByClassName('val-active');
     const filtered = [];
+    const data = load();
+
+    if (categories.length === 0) {
+      return this.displayLectureList(data);
+    }
+    for (const category of categories) {
+      filtered.push(...data.filter((lecture) => lecture.category === category.dataset.category));
+      // ....spread operator
+    }
+    return this.displayLectureList(filtered);
+
+    /* const filtered = [];
 
     if (categories.length === 0) {
       return this.displayLectureList(this.data);
@@ -86,15 +98,10 @@ export default class List { // muna tak ef ekki ID
       filtered.push(...this.data.filter((lecture) => lecture.category === category.dataset.category));
       // ....spread operator
     }
-    return this.displayLectureList(filtered);
+    return this.displayLectureList(filtered); */
   }
 
-  load() {
-    empty(this.container);
-    this.htmlButton.addEventListener('click', this.filter.bind(this));
-    this.cssButton.addEventListener('click', this.filter.bind(this));
-    this.jsButton.addEventListener('click', this.filter.bind(this));
-
+  fetchLectures() {
     fetch('./lectures.json')
       .then((res) => {
         if (!res.ok) {
@@ -103,11 +110,19 @@ export default class List { // muna tak ef ekki ID
         return res.json();
       })
       .then((data) => {
-        this.data = data.lectures;
-        this.displayLectureList(this.data);
+        this.displayLectureList(data.lectures);
       })
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  load() {
+    empty(this.container);
+    this.htmlButton.addEventListener('click', this.filter.bind(this));
+    this.cssButton.addEventListener('click', this.filter.bind(this));
+    this.jsButton.addEventListener('click', this.filter.bind(this));
+
+    this.fetchLectures();
   }
 }
