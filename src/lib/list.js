@@ -56,10 +56,10 @@ export default class List { // muna tak ef ekki ID
     const content = el('div', description, divImage);
     content.classList.add('list__content');
 
-    /*const saved = load();
-    if (saved.indexOf(item.slug) >= 0) {
+    /*const saved = save(item);
+    if (saved) {
       const check = el('div', '✓');
-      check.classList.add('listItem--check');
+      check.classList.add('listItem__check');
       description.appendChild(check);
     }*/
 
@@ -78,7 +78,8 @@ export default class List { // muna tak ef ekki ID
     const categories = document.getElementsByClassName('val-active');
     const filtered = [];
     const lectures = loadLectures();
-    console.log(lectures);
+    
+    console.log(lectures)
     if (categories.length === 0) {
       return this.displayLectureList(lectures);
     }
@@ -91,19 +92,19 @@ export default class List { // muna tak ef ekki ID
 
   fetchLectures() {
     fetch('./lectures.json')
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Villa við að sækja fyrirlestur');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        saveLectures(data.lectures);
-        this.displayLectureList(data.lectures);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Villa við að sækja fyrirlestur');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      saveLectures(data.lectures)
+      this.displayLectureList(data.lectures);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
   }
 
   load() {
@@ -113,7 +114,7 @@ export default class List { // muna tak ef ekki ID
     this.jsButton.addEventListener('click', this.filter.bind(this));
 
     const lectures = loadLectures();
-    if (lectures.length === 0) {
+    if(lectures.length === 0) {
       this.fetchLectures();
     } else {
       this.displayLectureList(lectures);
