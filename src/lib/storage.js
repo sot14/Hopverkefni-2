@@ -5,10 +5,10 @@ const LOCALSTORAGE_KEY = 'saved-lectures';
 const LECTURES_KEY = 'lectures'
 
 export function loadLec() {
-  const lecturesJson = localStorage.getItem(LOCALSTORAGE_KEY);
-  const lectures = JSON.parse(lecturesJson) || [];
+  const lectureJson = localStorage.getItem(LOCALSTORAGE_KEY);
+  const lecture = JSON.parse(lectureJson) || [];
 
-  return lectures;
+  return lecture;
 }
 
 export function loadLectures() {
@@ -26,16 +26,16 @@ export function saveLectures(lectures) {
 export function save(slug) {
   debugger;
 // includes slug, splice, push, 
-  const lectures = load();
-  const store = lectures.indexOf(slug);
+  const lectures = loadLec();
+  const store = lecture.indexOf(slug);
     
   if (store >= 0) {
-    lectures.splice(store, 1);
+    lecture.splice(store, 1);
   } else {
-    lectures.push(slug);
+    lecture.push(slug);
   }
 
-  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(lectures));
+  localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(lecture));
 } 
 
 /* export default function getSavedLecture(data) {

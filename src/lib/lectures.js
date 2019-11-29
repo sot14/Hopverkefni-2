@@ -75,7 +75,7 @@ export default class Lecture {
    * Býr til takka í footer og vistar fyrirlestur í local storage ef hann er kláraður 
    * @param {String} slug núverandi fyrirlesturs
    */
-  
+
   displayFooter(slug) {
     debugger;
     const saved = loadLec();
@@ -102,7 +102,7 @@ export default class Lecture {
    * @param {KeyEvent} e atburður
    * @param {String} slug núverandi fyrirlesturs
    */
-  isFinished(e, slug) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ í list
+  isFinished(slug, e) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ í list
     debugger;
     const saved = loadLec();
     if (saved.indexOf(slug) >= 0) {
