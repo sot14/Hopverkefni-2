@@ -102,11 +102,7 @@ export default class Lecture {
    * @param {KeyEvent} e atburður
    * @param {String} slug núverandi fyrirlesturs
    */
-<<<<<<< Updated upstream
   isFinished(slug, e) {
-=======
-  isFinished(slug, e) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ í list
->>>>>>> Stashed changes
     const saved = loadLec();
     if (saved.indexOf(slug) >= 0) {
       e.target.textContent = 'Klára fyrirlestur';
@@ -166,13 +162,16 @@ export default class Lecture {
   }
 
   showCode(element, data) {
-    // þarf mögulega að replacea & = &amp og < = &lt
     const splitCode = data.split('\n');
+    const div = document.createElement('div');
+    div.classList.add('lecture__code');
     for (let i = 0; i < splitCode.length; i += 1) {
       const code = el('code', splitCode[i]);
-      element.appendChild(code);
+      div.appendChild(code);
     }
+    element.appendChild(div);
   }
+
 
   /**
    * Les í gegnum fyrirlestur og athugar hvers konar efni á að birta í fyrirlestri
