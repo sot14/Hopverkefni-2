@@ -2,7 +2,6 @@
 /* eslint-disable no-trailing-spaces */
 
 const LOCALSTORAGE_KEY = 'saved-lectures';
-const LECTURES_KEY = 'lectures'
 
 export function loadLec() {
   const lectureJson = localStorage.getItem(LOCALSTORAGE_KEY);
@@ -25,17 +24,6 @@ export function save(slug) {
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(lectures));
 } 
 
-export function loadLectures() {
-  const lecturesJson = localStorage.getItem(LECTURES_KEY);
-  const lectures = JSON.parse(lecturesJson) || [];
-
-  return lectures;
-}
-
-export function saveLectures(lectures) {
-  console.log('saving')
-  localStorage.setItem(LECTURES_KEY, JSON.stringify(lectures));
-}
 /* export default function getSavedLecture(data) {
   const savedLecture = localStorage.getItem(data.slug);
   if (!savedLecture) return null;

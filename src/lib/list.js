@@ -3,7 +3,7 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable max-len */
 
-import { saveLectures, loadLectures, loadLec } from './storage';
+import { loadLec } from './storage';
 import { el, empty } from './helpers';
 import Lecture from './lectures';
 
@@ -80,9 +80,8 @@ export default class List { // muna tak ef ekki ID
   filter() {
     const categories = document.getElementsByClassName('val-active');
     const filtered = [];
-    const lectures = loadLectures();
+    const lectures = this.data;
 
-    console.log(lectures);
     if (categories.length === 0) {
       return this.displayLectureList(lectures);
     }
@@ -102,8 +101,8 @@ export default class List { // muna tak ef ekki ID
         return res.json();
       })
       .then((data) => {
-        saveLectures(data.lectures);
-        this.displayLectureList(data.lectures);
+       this.data = data.lectures;
+       this.displayLectureList(this.data);
       })
       .catch((error) => {
         console.error(error);
@@ -116,11 +115,6 @@ export default class List { // muna tak ef ekki ID
     this.cssButton.addEventListener('click', this.filter.bind(this));
     this.jsButton.addEventListener('click', this.filter.bind(this));
 
-    const lectures = loadLectures();
-    if (lectures.length === 0) {
-      this.fetchLectures();
-    } else {
-      this.displayLectureList(lectures);
-    }
+    this.fetchLectures();
   }
 }
