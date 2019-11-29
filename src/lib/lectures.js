@@ -84,6 +84,7 @@ export default class Lecture {
       klaraButton.style.color = '#2d2';
     } else {
         klaraButton.textContent = 'Klára fyrirlestur';
+        klaraButton.style.color = '#000';
       }
     klaraButton.addEventListener('click', this.isFinished.bind(this, slug));
     const backButton = el('a', 'Til baka');
@@ -161,6 +162,7 @@ export default class Lecture {
   }
 
   showCode(element, data) {
+    debugger;
     // þarf mögulega að replacea & = &amp og < = &lt
     const splitCode = data.split('\n');
     for (let i = 0; i < splitCode.length; i += 1) {
