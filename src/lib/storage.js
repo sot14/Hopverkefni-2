@@ -23,8 +23,8 @@ export function saveLectures(lectures) {
   localStorage.setItem(LECTURES_KEY, JSON.stringify(lectures));
 }
 
- export function save(slug) {
-//includes slug, splice, push, 
+export function save(slug) {
+// includes slug, splice, push, 
   const lectures = load();
   const store = lectures.indexOf(slug);
     
@@ -37,8 +37,8 @@ export function saveLectures(lectures) {
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(lectures));
 } 
 
-/*export default function getSavedLecture(data) {
+/* export default function getSavedLecture(data) {
   const savedLecture = localStorage.getItem(data.slug);
   if (!savedLecture) return null;
   return savedLecture;
-}*/
+} */
