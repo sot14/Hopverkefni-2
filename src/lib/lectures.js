@@ -102,7 +102,11 @@ export default class Lecture {
    * @param {KeyEvent} e atburður
    * @param {String} slug núverandi fyrirlesturs
    */
+<<<<<<< Updated upstream
   isFinished(slug, e) {
+=======
+  isFinished(slug, e) { // TO DO fá list til að taka við að þetta sé finished og gera ✔ í list
+>>>>>>> Stashed changes
     const saved = loadLec();
     if (saved.indexOf(slug) >= 0) {
       e.target.textContent = 'Klára fyrirlestur';
