@@ -4,93 +4,104 @@
     background-repeat: no-repeat;
     background-size: 100%;
     justify-content: center;
+  
     .header__content {
-        background-size: cover;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        background-color: rgba(31, 18, 18, 0.4);
-        width: 100%;
-        height: 100%;
-       
-        h1 {
-            display: block;
-            font-family: $font-header;
-            position: relative;
-            z-index: 1;
-        }
-        h3 {
-            display: block;
-            text-align: center;
-            font-family: $font-header;
-            z-index: 1;
-        }
-   
+      display: flex;
+      width: 100%;
+      height: 100%;
+      flex-direction: column;
+      background-color: rgba(255, 255, 255, 0.4);
+      background-size: cover;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+  
+      h1 {
+        position: relative;
+        z-index: 1;
+        display: block;
+        font-family: $font-header;
+      }
+  
+      h3 {
+        z-index: 1;
+        display: block;
+        font-family: $font-header;
+        text-align: center;
+      }
     }
-}
-.lec{
-    max-width: 800px;
+  }
+  
+.lec {
+    width: 67%;
+    max-width: $max-width;
     margin: auto;
- 
+    margin-bottom: 3em;
+  
     .lecture {
- 
-        .lecture__video {
-            position: relative;
-            max-width: 100%;
-            height: 20%;  // laga í media? birtist ekki alveg rétt
-            margin: $gutter 0;
-            padding-bottom: 56.25%;
-            overflow: hidden;
-       
-            iframe {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-            }
+      .lecture__video {
+        position: relative;
+        max-width: 100%;
+        height: 20%;
+        padding-bottom: 56.25%;
+        margin: $gutter 0;
+        overflow: hidden;
+  
+        iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
         }
-        .lecture__image {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: $gutter;
-        }
-        p {
-            margin-bottom: $gutter;
-            font-family: $font-main;
-            font-size: $base;
-        }
-        .lecture__code {
-            margin: $gutter 0;
-        }
-        code {
-            display: block;
-        }
-        blockquote {
-            background-color: $lightgrey;
-            font-family: $font-main;
-        }
-    }
-}
-.lecture-footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 30vh;
- 
-    .button__klarad, .button__klarad--active {
-        background-color: transparent;
-        border-color: transparent;
+      }
+  
+      .lecture__image {
+        display: flex;
+        margin-bottom: $gutter;
+        flex-direction: column;
+      }
+  
+      p {
         margin-bottom: $gutter;
         font-family: $font-main;
-    }
- 
-    .button__back {
-        text-align: center;
-        color: $black;
-        text-decoration-line: unset;
+        font-size: $base;
+  
+      }
+  
+      .lecture__code {
+        margin: $gutter 0;
+      }
+  
+      code {
+        display: block;
+      }
+  
+      blockquote {
         font-family: $font-main;
+        background-color: $lightgrey;
+      }
     }
-}
+  }
+  
+  .lecture-footer {
+    display: flex;
+    height: 30vh;
+    flex-direction: column;
+    justify-content: center;
+  
+    .button__klarad,
+    .button__klarad--active {
+      margin-bottom: $gutter;
+      font-family: $font-main;
+      background-color: transparent;
+      border-color: transparent;
+    }
+  
+    .button__back {
+      font-family: $font-main;
+      color: $black;
+      text-align: center;
+      text-decoration-line: unset;
+    }
+  }

@@ -1,143 +1,152 @@
 .head {
- 
+  display: flex;
+  height: 50vh;
+  background-image: url("../img/header.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  justify-content: center;
+
+  .h__container {
     display: flex;
-    height: 50vh;
-    background-image: url("../img/header.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.4);
+    background-size: cover;
+    align-items: center;
     justify-content: center;
-    .h__container {
-        background-size: cover;
+    flex-wrap: wrap;
+
+    .h__f1 {
+      position: relative;
+      display: block;
+      font-family: $font-header;
+      text-transform: uppercase;
+    }
+
+    .h__f2 {
+      display: block;
+      font-family: $font-header;
+      text-align: center;
+    }
+  }
+}
+
+.valmynd {
+  display: flex;
+  margin: $gutter 12em $gutter 12em;
+  justify-content: center;
+}
+
+.valm {
+  padding: $gutter*0.5;
+  margin: $gutter;
+  font-family: $font-header;
+  font-weight: bold;
+  cursor: pointer;
+  background: $lightgrey;
+  border-radius: 10px;
+
+  &:hover {
+    background-color: $darkgrey;
+    transition: 0.3s ease-in-out;
+  }
+}
+
+.val-active {
+  background: $green;
+
+  &:hover {
+    background-color: $green;
+  }
+}
+
+.list {
+  display: grid;
+  max-width: $max-width;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: $gutter;
+  margin: auto;
+  margin-bottom: 3em;
+
+  .list__page {
+    height: 300px;
+    margin-bottom: $gutter*2;
+
+    a {
+      text-decoration: none;
+
+      .list__content {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        background-color: rgba(255,255,255,0.4);
         width: 100%;
         height: 100%;
-        .h__f1 {
-            display: block;
+        color: $black;
+        flex-direction: column-reverse;
+        align-self: flex-end;
+        background: $lightgrey;
+
+        &:hover {
+          background-color: #aaa;
+          transition: 0.3s ease-in-out;
+        }
+
+        .list__description {
+          position: relative;
+          display: flex;
+          padding: 0.5em;
+          font-family: $font-header;
+          flex-direction: column-reverse;
+
+          .list__title {
+            font-size: $medium;
+            line-height: 1em;
+          }
+
+          .list__category {
             text-transform: uppercase;
-            font-family: $font-header;
-            position: relative;
-       }
-        .h__f2 {
-            display: block;
-            text-align: center;
-            font-family: $font-header;
-       }
-   }
+          }
+
+          .listItem__check {  
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            padding: 0 $gutter $gutter 0;
+            font-size: $medium;
+            color: $darkgreen;
+            flex-flow: row-reverse;
+          }
+        }
+
+        .list__image {
+          position: relative;
+          max-width: 100%;
+          max-height: 100%;
+
+          img {
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+      }
+    }
+  }
 }
-.valmynd {
+@media (max-width: 800px) {
+  .valmynd {
     display: flex;
-    margin: $gutter 12em $gutter 12em;
-    justify-content: center;
-   }
-   /*.valmynd__takkar
-       */
-        .valm {
-            padding: $gutter*0.5;
-            background:$lightgrey;
-            border-radius: 10px;
-            font-family: $font-header;
-            font-weight: bold;
-            margin:$gutter;
-            cursor: pointer;
-            &:hover{
-                background-color: $darkgrey;
-                transition: 0.3s ease-in-out;
-           }
-       }
-       
-    .val-active{
-        background:$green;
-        &:hover{
-            background-color:$green;
-       }
-   }
- 
-.list {
-    display: grid;
-    max-width: $max-width;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap:$gutter;
     margin: auto;
-    margin-bottom: 3em;
- 
-    .list__page{
-        height: 300px;
-        margin-bottom:$gutter*2;
-        a{
-            text-decoration: none;
-            .list__content{
-                display: flex;
-                flex-direction: column-reverse;
-                color: black;
-                width: 100%;
-                height: 100%;
-                align-self: flex-end;
-                background: $lightgrey;
-                &:hover {
-                    background-color: #aaa;
-                    transition: 0.3s ease-in-out;
-               }
-                .list__description{
-                    position: relative;
-                    font-family: $font-header;
-                    padding:0.5em;
-                    display: flex;
-                    flex-direction: column-reverse;
-                    .list__title{
-                        line-height: 1em;
-                        font-size: $medium;
-                   }
-                    .list__category{
-                        text-transform: uppercase;
-                   }
-                    .listItem__check{
-                        color:$darkgreen;
-                        display: flex;
-                        flex-flow: row-reverse;
-                        font-size: $medium;
-                        position: absolute;
-                        bottom: 0;
-                        right: 0;
-                        padding:0 $gutter $gutter 0;
-                   }
-               }
-                .list__image{
-                    position: relative;
-                    max-height:100%;
-                    max-width: 100%;
-                    img{
-                        max-height: 100%;
-                        max-width: 100%;
- 
-                        }
- 
-                   }
-               }
-           }
-       }
-   }
-   @media(max-width:800px){
-       .valmynd{
-        display: flex;
-        margin: auto;
-       
-        flex-wrap: wrap;
-       }
- 
-       .list {
-           display: block;
-           grid-template-columns: 50%;
-           margin:$gutter 20%;
- 
-           a {
-               position: relative;
-               height: 100%;
-           }
-     
-       }
-   }
+    flex-wrap: wrap;
+  }
+
+  .list {
+    display: block;
+    grid-template-columns: 50%;
+    margin: $gutter 20%;
+
+    a {
+      position: relative;
+      height: 100%;
+    }
+  }
+}

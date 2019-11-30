@@ -7,7 +7,7 @@ import { loadLec } from './storage';
 import { el, empty } from './helpers';
 import Lecture from './lectures';
 
-export default class List { // muna tak ef ekki ID
+export default class List {
   constructor() {
     this.container = document.querySelector('.list');
     this.htmlButton = document.querySelector('.valm__html');
@@ -57,7 +57,6 @@ export default class List { // muna tak ef ekki ID
     content.classList.add('list__content');
 
     const saved = loadLec();
-    debugger;
     for (let i = 0; i < saved.length; i += 1) {
       if (saved[i] === item.slug) {
         const check = el('div', '✓');
